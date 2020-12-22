@@ -1,30 +1,12 @@
 import React from "react";
-// plugin that creates slider
-import Slider from "nouislider";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
-import Radio from "@material-ui/core/Radio";
-import Switch from "@material-ui/core/Switch";
-// @material-ui/icons
-import Favorite from "@material-ui/icons/Favorite";
-import People from "@material-ui/icons/People";
-import Check from "@material-ui/icons/Check";
-import FiberManualRecord from "@material-ui/icons/FiberManualRecord";
+import AutocompleteSelect from "components/common/AutocompleteSelect.js"
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
-import Button from "components/CustomButtons/Button.js";
-import CustomInput from "components/CustomInput/CustomInput.js";
-import CustomLinearProgress from "components/CustomLinearProgress/CustomLinearProgress.js";
-import Paginations from "components/Pagination/Pagination.js";
-import Badge from "components/Badge/Badge.js";
-// @material-ui/icons
-import Face from "@material-ui/icons/Face";
-import Chat from "@material-ui/icons/Chat";
-import Build from "@material-ui/icons/Build";
+
+
 // core components
 import CustomTabs from "components/CustomTabs/CustomTabs.js";
 
@@ -50,6 +32,7 @@ export default function SectionBasics() {
               상세필터
               <br />
             </h3>
+          <AutocompleteSelect/>
           </div>
           <GridContainer justify="flex-start">
             <Query
@@ -65,6 +48,7 @@ export default function SectionBasics() {
                   <p>불러오는중..</p>
                 ) : (
                   <>
+                  {console.log(data.adminUser)}
                     {data.adminUser.result.map((post) => (
                       <GridItem xs={12} sm={12} md={6} key={post.id}>
                         <CustomTabs headerColor="primary" post={post} />

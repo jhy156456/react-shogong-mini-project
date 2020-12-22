@@ -66,12 +66,12 @@ export default function HeaderLinks(props) {
           <CloudDownload className={classes.icons} /> Download
         </Button>
       </ListItem> */}
-      <ListItem className={classes.listItem}>
-        {/*<Tooltip title="Delete">
+      {/* <ListItem className={classes.listItem}>
+        <Tooltip title="Delete">
           <IconButton aria-label="Delete">
             <DeleteIcon />
           </IconButton>
-        </Tooltip>*/}
+        </Tooltip>
         <Tooltip
           id="instagram-twitter"
           title="Follow us on twitter"
@@ -87,17 +87,17 @@ export default function HeaderLinks(props) {
             <i className={classes.socialIcons + " fab fa-twitter"} />
           </Button>
         </Tooltip>
-      </ListItem>
+      </ListItem> */}
       <ListItem className={classes.listItem}>
         <Tooltip
           id="instagram-facebook"
-          title="Follow us on facebook"
+          title="쇼공 페이스북"
           placement={window.innerWidth > 959 ? "top" : "left"}
           classes={{ tooltip: classes.tooltip }}
         >
           <Button
             color="transparent"
-            href="https://www.facebook.com/CreativeTim?ref=creativetim"
+            href="https://www.facebook.com/shogongofficial"
             target="_blank"
             className={classes.navLink}
           >
@@ -108,13 +108,13 @@ export default function HeaderLinks(props) {
       <ListItem className={classes.listItem}>
         <Tooltip
           id="instagram-tooltip"
-          title="Follow us on instagram"
+          title="쇼공 인스타그램"
           placement={window.innerWidth > 959 ? "top" : "left"}
           classes={{ tooltip: classes.tooltip }}
         >
           <Button
             color="transparent"
-            href="https://www.instagram.com/CreativeTimOfficial?ref=creativetim"
+            href="https://www.instagram.com/shogong.official/"
             target="_blank"
             className={classes.navLink}
           >
