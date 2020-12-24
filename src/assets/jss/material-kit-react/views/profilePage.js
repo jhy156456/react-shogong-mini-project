@@ -57,6 +57,9 @@ const profilePageStyle = {
   navWrapper: {
     margin: "20px auto 50px auto",
     textAlign: "center"
+  },
+  h3Style:{
+    fontWeight: "bold",
   }
 };
 

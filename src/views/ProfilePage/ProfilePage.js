@@ -8,7 +8,7 @@ import Camera from "@material-ui/icons/Camera";
 import Palette from "@material-ui/icons/Palette";
 import Favorite from "@material-ui/icons/Favorite";
 // core components
-
+import SectionCarousel from "components/Sections/SectionCarousel.js";
 import Button from "components/CustomButtons/Button.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
@@ -36,14 +36,18 @@ import styles from "assets/jss/material-kit-react/views/profilePage.js";
 import { USER_INFO_QUERY } from "lib/api/user.js";
 import { useParams } from "react-router-dom";
 import { Query } from "react-apollo";
-
+import "./hi.css"
 const useStyles = makeStyles(styles);
 
 export default function ProfilePage(props) {
   const classes = useStyles();
   const { id } = useParams();
   const { ...rest } = props;
-  const imageClasses = classNames(classes.imgRaised, classes.imgFluid,classes.imgRounded);
+  const imageClasses = classNames(
+    classes.imgRaised,
+    classes.imgFluid,
+    classes.imgRounded
+  );
   const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
   return (
     <Query
@@ -61,7 +65,7 @@ export default function ProfilePage(props) {
           <div>
             {(function () {
               const userInfo = data.userInfo;
-              console.log(userInfo)
+              console.log(userInfo);
               return (
                 <React.Fragment>
                   <Parallax
@@ -90,7 +94,7 @@ export default function ProfilePage(props) {
                                       color="textPrimary"
                                       variant="h5"
                                     >
-                                      <Box fontWeight="fontWeightBold">
+                                      <Box fontWeight="fontWeightBold" mb={1}>
                                         {userInfo.business.license_name}
                                       </Box>
                                     </Typography>
@@ -100,7 +104,7 @@ export default function ProfilePage(props) {
                                   </Grid>
                                 </Grid>
 
-                                <Box mb={3}>
+                                <Box mb={1}>
                                   <Typography
                                     align="center"
                                     color="textPrimary"
@@ -159,26 +163,26 @@ export default function ProfilePage(props) {
                         <GridContainer>
                           <GridItem xs={12} sm={12} md={6}>
                             <div className={classes.title}>
-                              <h3 style={{ fontWeight: "bold" }}>사업형태</h3>
+                              <h4 className={classes.h3Style}>사업형태</h4>
                             </div>
                             <Typography variant="body2">직접생산</Typography>
                             <div className={classes.title}>
-                              <h3 style={{ fontWeight: "bold" }}>주요업무</h3>
+                              <h4 style={{ fontWeight: "bold" }}>주요업무</h4>
                             </div>
                             <Typography variant="body2">직접생산</Typography>
                           </GridItem>
 
                           <GridItem xs={12} sm={12} md={6}>
                             <div className={classes.title}>
-                              <h3 style={{ fontWeight: "bold" }}>
+                              <h4 style={{ fontWeight: "bold" }}>
                                 주요 생산 카테고리
-                              </h3>
+                              </h4>
                             </div>
                             <Typography variant="body2">직접생산</Typography>
                             <div className={classes.title}>
-                              <h3 style={{ fontWeight: "bold" }}>
+                              <h4 style={{ fontWeight: "bold" }}>
                                 주요 생산 품목
-                              </h3>
+                              </h4>
                             </div>
                             <Typography variant="body2">직접생산</Typography>
                           </GridItem>
@@ -189,19 +193,19 @@ export default function ProfilePage(props) {
                         <GridContainer>
                           <GridItem xs={12} sm={12} md={6}>
                             <div className={classes.title}>
-                              <h3 style={{ fontWeight: "bold" }}>
+                              <h4 style={{ fontWeight: "bold" }}>
                                 최소 주문 수량(MOQ)
-                              </h3>
+                              </h4>
                             </div>
                             <Typography variant="body2">100개</Typography>
                             <div className={classes.title}>
-                              <h3 style={{ fontWeight: "bold" }}>근로자수</h3>
+                              <h4 style={{ fontWeight: "bold" }}>근로자수</h4>
                             </div>
                             <Typography variant="body2">20명</Typography>
                             <div className={classes.title}>
-                              <h3 style={{ fontWeight: "bold" }}>
+                              <h4 style={{ fontWeight: "bold" }}>
                                 사용 가능 설비
-                              </h3>
+                              </h4>
                             </div>
                             <Typography variant="body2">
                               나나인치 오버로크 슈퍼 워싱기 CAD
@@ -210,15 +214,15 @@ export default function ProfilePage(props) {
 
                           <GridItem xs={12} sm={12} md={6}>
                             <div className={classes.title}>
-                              <h3 style={{ fontWeight: "bold" }}>
+                              <h4 style={{ fontWeight: "bold" }}>
                                 거래처 분류
-                              </h3>
+                              </h4>
                             </div>
                             <Typography variant="body2">
                               직접생산 디자인 프로모션
                             </Typography>
                             <div className={classes.title}>
-                              <h3 style={{ fontWeight: "bold" }}>거래처명</h3>
+                              <h4 style={{ fontWeight: "bold" }}>거래처명</h4>
                             </div>
                             <Typography variant="body2">
                               구찌 샤넬 버버리
@@ -227,6 +231,27 @@ export default function ProfilePage(props) {
                         </GridContainer>
                         <Box mb={3} />
                         <Divider variant="middle" />
+
+                        <SectionCarousel />
+
+                        <div className="ab">
+                          <h1>Some headline</h1>
+
+                          <ul className="hs full">
+                            <li className="item">test</li>
+                            <li className="item">test</li>
+                            <li className="item">test</li>
+                            <li className="item">test</li>
+                            <li className="item">test</li>
+                            <li className="item">test</li>
+                          </ul>
+
+                          <div className="container">
+                            <div className="item">
+                              <h3>Block for context</h3>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>

@@ -20,14 +20,16 @@ import CardHeader from "components/Card/CardHeader.js";
 import { Link } from "react-router-dom";
 import styles from "assets/jss/material-kit-react/components/customTabsStyle.js";
 import CardActionArea from "@material-ui/core/CardActionArea";
+import Box from "@material-ui/core/Box"
 const useStyles = makeStyles((theme) => ({
   paper: {
-    padding: theme.spacing(2),
     margin: theme.spacing(1),
+    padding: theme.spacing(1),
   },
   paper2: {
-    padding: theme.spacing(2),
-    margin: theme.spacing(2),
+    padding: theme.spacing(0.5),
+    marginLeft: theme.spacing(2),
+    marginRight: theme.spacing(2),
   },
   cardTitle: {
     float: "left",
@@ -83,6 +85,9 @@ const useStyles = makeStyles((theme) => ({
       letterSpacing: "normal !important",
     },
   },
+  h6Style:{
+    fontSize:'0.7rem'
+  }
 }));
 
 export default function CustomTabs(props) {
@@ -100,55 +105,55 @@ export default function CustomTabs(props) {
   });
   return (
     <CardActionArea component="div">
-    <Link
-      underline="none"
-      to={`/store/${props.post.id}`}
-      style={{ textDecoration: "none", color: "white" }}
-    >
-    <Card plain={plainTabs}>
-      
-      <CardHeader color={headerColor} plain={plainTabs}>
-        <Grid container justify="space-around" >
-          <Grid item xs={3} sm={3} md={3}>
-            <Typography align="center" variant="body1">
-            {business.license_name}
-            </Typography>
-          </Grid>
-          <Grid item xs={3} sm={3} md={3} style={{margin:'auto'}}>
-            <Typography variant="body2"  > 원단공장</Typography>
-          </Grid>
-          <Grid item xs={3} sm={3} md={3} >
-            <FavoriteBorderIcon style={{float:'right'}} />
-          </Grid>
-        </Grid>
-      </CardHeader>
-      <Paper className={classes.paper2}>hihi</Paper>
-      <CardBody>
-        <Grid container justify="space-around" className={classes.paper}>
-          <Grid item xs={3} sm={4} md={3}>
-            <Typography variant="subtitle2">주요 생산 품목</Typography>
-          </Grid>
-          <Grid item xs={3} sm={4} md={3}>
-            <Typography variant="subtitle2">카테고리</Typography>
-          </Grid>
-          <Grid item xs={3} sm={4} md={3}>
-            <Typography variant="subtitle2">주요 생산 품목</Typography>
-          </Grid>
-        </Grid>
-        <Grid container justify="space-around" className={classes.paper}>
-          <Grid item xs={3} sm={4} md={3}>
-            <Typography variant="subtitle2">주소</Typography>
-          </Grid>
-          <Grid item xs={3} sm={4} md={3}>
-            <Typography variant="subtitle2">최소생산수량</Typography>
-          </Grid>
-          <Grid item xs={3} sm={4} md={3}>
-            <Typography variant="subtitle2">규모</Typography>
-          </Grid>
-        </Grid>
-      </CardBody>
-    </Card>
-    </Link></CardActionArea>
+      <Link
+        underline="none"
+        to={`/store/${props.post.id}`}
+        style={{ textDecoration: "none", color: "white" }}
+      >
+        <Card plain={plainTabs} >
+          <CardHeader  plain={plainTabs}>
+            <Grid container justify="space-around" noWrap>
+              <Grid item xs={4} sm={3} md={3}>
+                <Typography align="center" variant="body1" style={{fontWeight:'bold'}} align="left">
+                  {business.license_name}
+                </Typography>
+              </Grid>
+              <Grid item xs={3} sm={3} md={3} style={{ margin: "auto" }} >
+                <Typography variant="h6" className={classes.h6Style}> 원단공장</Typography>
+              </Grid>
+              <Grid item xs={3} sm={3} md={3}>
+                <FavoriteBorderIcon style={{ float: "right" }} />
+              </Grid>
+            </Grid>
+          </CardHeader>
+          <Box className={classes.paper2} border={1}>안녕하세요페이퍼에요</Box>
+          <CardBody>
+            <Grid container justify="space-around" className={classes.paper}>
+              <Grid item xs={3} sm={4} md={3}>
+                <Typography variant="h6" className={classes.h6Style}>주요 생산 품목</Typography>
+              </Grid>
+              <Grid item xs={3} sm={4} md={3}>
+                <Typography variant="h6"className={classes.h6Style}>카테고리</Typography>
+              </Grid>
+              <Grid item xs={3} sm={4} md={3}>
+                <Typography variant="h6"className={classes.h6Style}>주요 생산 품목</Typography>
+              </Grid>
+            </Grid>
+            <Grid container justify="space-around" className={classes.paper}>
+              <Grid item xs={3} sm={4} md={3}>
+                <Typography variant="h6"className={classes.h6Style}>주소</Typography>
+              </Grid>
+              <Grid item xs={3} sm={4} md={3}>
+                <Typography variant="h6"className={classes.h6Style}>최소생산수량</Typography>
+              </Grid>
+              <Grid item xs={3} sm={4} md={3}>
+                <Typography variant="h6"className={classes.h6Style}>규모</Typography>
+              </Grid>
+            </Grid>
+          </CardBody>
+        </Card>
+      </Link>
+    </CardActionArea>
   );
 }
 
