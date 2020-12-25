@@ -59,6 +59,7 @@ const profilePageStyle = {
     textAlign: "center"
   },
   h3Style:{
+    fontSize : "1rem",
     fontWeight: "bold",
   }
 };

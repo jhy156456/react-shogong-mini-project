@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core components
@@ -36,10 +36,34 @@ import styles from "assets/jss/material-kit-react/views/profilePage.js";
 import { USER_INFO_QUERY } from "lib/api/user.js";
 import { useParams } from "react-router-dom";
 import { Query } from "react-apollo";
-import "./hi.css"
+import "./hi.css";
+
+import studio1 from "assets/img/examples/studio-1.jpg";
+import studio2 from "assets/img/examples/studio-2.jpg";
+import studio3 from "assets/img/examples/studio-3.jpg";
+import studio4 from "assets/img/examples/studio-4.jpg";
+import studio5 from "assets/img/examples/studio-5.jpg";
+import work1 from "assets/img/examples/olu-eletu.jpg";
+import work2 from "assets/img/examples/clem-onojeghuo.jpg";
+import work3 from "assets/img/examples/cynthia-del-rio.jpg";
+import work4 from "assets/img/examples/mariya-georgieva.jpg";
+import work5 from "assets/img/examples/clem-onojegaw.jpg";
+import SinglineGridList from "./SingleLineGridList";
+
 const useStyles = makeStyles(styles);
 
 export default function ProfilePage(props) {
+  const [mQuery, setMQuery] = React.useState({
+    matches: window.innerWidth > 576 ? true : false,
+  });
+  useEffect(() => {
+    let mediaQuery = window.matchMedia("(min-width: 576px)");
+    mediaQuery.addListener(setMQuery);
+    // this is the cleanup function to remove the listener
+    return () => mediaQuery.removeListener(setMQuery);
+  }, []);
+  // MediaQueryListEvent { isTrusted: true, media: "(min-width: 768px)", matches: true ...}
+
   const classes = useStyles();
   const { id } = useParams();
   const { ...rest } = props;
@@ -65,7 +89,6 @@ export default function ProfilePage(props) {
           <div>
             {(function () {
               const userInfo = data.userInfo;
-              console.log(userInfo);
               return (
                 <React.Fragment>
                   <Parallax
@@ -118,26 +141,30 @@ export default function ProfilePage(props) {
                                   <Grid container justify="center" spacing={2}>
                                     <Grid className={classes.statsItem} item>
                                       <PhoneIcon
-                                        className={classes.statsIcon}
+                                        className={classes.verticalIcon}
                                         color="action"
+                                        fontSize="inherit"
                                       />
                                       <Typography
                                         color="textSecondary"
                                         display="inline"
                                         variant="body2"
+                                        style={{ verticalAlign: "middle" }}
                                       >
                                         연락처 조회수 1
                                       </Typography>
                                     </Grid>
                                     <Grid className={classes.statsItem} item>
                                       <ChatBubbleOutlineIcon
-                                        className={classes.statsIcon}
+                                        className={classes.verticalIcon}
                                         color="action"
+                                        fontSize="inherit"
                                       />
                                       <Typography
                                         color="textSecondary"
                                         display="inline"
                                         variant="body2"
+                                        style={{ verticalAlign: "middle" }}
                                       >
                                         거래후기 3
                                       </Typography>
@@ -167,20 +194,20 @@ export default function ProfilePage(props) {
                             </div>
                             <Typography variant="body2">직접생산</Typography>
                             <div className={classes.title}>
-                              <h4 style={{ fontWeight: "bold" }}>주요업무</h4>
+                              <h4 className={classes.h3Style}>주요업무</h4>
                             </div>
                             <Typography variant="body2">직접생산</Typography>
                           </GridItem>
 
                           <GridItem xs={12} sm={12} md={6}>
                             <div className={classes.title}>
-                              <h4 style={{ fontWeight: "bold" }}>
+                              <h4 className={classes.h3Style}>
                                 주요 생산 카테고리
                               </h4>
                             </div>
                             <Typography variant="body2">직접생산</Typography>
                             <div className={classes.title}>
-                              <h4 style={{ fontWeight: "bold" }}>
+                              <h4 className={classes.h3Style}>
                                 주요 생산 품목
                               </h4>
                             </div>
@@ -193,17 +220,17 @@ export default function ProfilePage(props) {
                         <GridContainer>
                           <GridItem xs={12} sm={12} md={6}>
                             <div className={classes.title}>
-                              <h4 style={{ fontWeight: "bold" }}>
+                              <h4 className={classes.h3Style}>
                                 최소 주문 수량(MOQ)
                               </h4>
                             </div>
                             <Typography variant="body2">100개</Typography>
                             <div className={classes.title}>
-                              <h4 style={{ fontWeight: "bold" }}>근로자수</h4>
+                              <h4 className={classes.h3Style}>근로자수</h4>
                             </div>
                             <Typography variant="body2">20명</Typography>
                             <div className={classes.title}>
-                              <h4 style={{ fontWeight: "bold" }}>
+                              <h4 className={classes.h3Style}>
                                 사용 가능 설비
                               </h4>
                             </div>
@@ -214,15 +241,13 @@ export default function ProfilePage(props) {
 
                           <GridItem xs={12} sm={12} md={6}>
                             <div className={classes.title}>
-                              <h4 style={{ fontWeight: "bold" }}>
-                                거래처 분류
-                              </h4>
+                              <h4 className={classes.h3Style}>거래처 분류</h4>
                             </div>
                             <Typography variant="body2">
                               직접생산 디자인 프로모션
                             </Typography>
                             <div className={classes.title}>
-                              <h4 style={{ fontWeight: "bold" }}>거래처명</h4>
+                              <h4 className={classes.h3Style}>거래처명</h4>
                             </div>
                             <Typography variant="body2">
                               구찌 샤넬 버버리
@@ -230,28 +255,24 @@ export default function ProfilePage(props) {
                           </GridItem>
                         </GridContainer>
                         <Box mb={3} />
-                        <Divider variant="middle" />
+                        <Divider variant="fullWidth" />
 
-                        <SectionCarousel />
-
-                        <div className="ab">
-                          <h1>Some headline</h1>
-
-                          <ul className="hs full">
-                            <li className="item">test</li>
-                            <li className="item">test</li>
-                            <li className="item">test</li>
-                            <li className="item">test</li>
-                            <li className="item">test</li>
-                            <li className="item">test</li>
-                          </ul>
-
-                          <div className="container">
-                            <div className="item">
-                              <h3>Block for context</h3>
-                            </div>
-                          </div>
-                        </div>
+                        {mQuery && !mQuery.matches ? (
+                          <GridContainer>
+                            <GridItem
+                              xs={12}
+                              sm={12}
+                              md={8}
+                              className={classes.navWrapper}
+                            >
+                              <SinglineGridList
+                                itemClass={navImageClasses}
+                              ></SinglineGridList>
+                            </GridItem>
+                          </GridContainer>
+                        ) : (
+                          <SectionCarousel />
+                        )}
                       </div>
                     </div>
                   </div>

@@ -41,7 +41,20 @@ const imagesStyles = {
     bottom: "0",
     left: "0",
     padding: "1.25rem"
-  }
+  },
+  verticalIcon:{
+    verticalAlign:"middle"
+  },
+  // sliderItem:{
+  //   scrollSnapAlign: "center",
+  //   padding: "calc(var(--gutter) / 2 * 1.5)",
+  //   display: "flex",
+  //   flexDirection: "column",
+  //   justifyContent: "center",
+  //   alignItems: "center",
+  //   background: "#fff",
+  //   borderRadius: "8px"
+  // }
 };
 
 export default imagesStyles;
