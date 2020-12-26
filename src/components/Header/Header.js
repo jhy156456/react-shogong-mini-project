@@ -102,22 +102,21 @@ export default function Header(props) {
     const { color, changeColorOnScroll,hi } = props;
     const windowsScrollTop = window.pageYOffset;
     if (windowsScrollTop > changeColorOnScroll.height) {
+      // console.log(  document.body.getElementsByTagName("header")[0])
+      // console.log(  document.body.getElementsByTagName("header")[0].classList)
+      //   console.log(classes[color])
+      //   console.log(classes[changeColorOnScroll.color])
+
       //변경상태
-      document.body
-        .getElementsByTagName("header")[0]
-        .classList.remove(classes[color]);
-      document.body
-        .getElementsByTagName("header")[0]
-        .classList.add(classes[changeColorOnScroll.color]);
+      document.body.getElementsByTagName("header")[0].classList.remove(classes[color]);
+        
+      document.body.getElementsByTagName("header")[0].classList.add(classes[changeColorOnScroll.color]);
+
       imageRef.current.src = LogoBlack;
     } else {
       //초기상태
-      document.body
-        .getElementsByTagName("header")[0]
-        .classList.add(classes[color]);
-      document.body
-        .getElementsByTagName("header")[0]
-        .classList.remove(classes[changeColorOnScroll.color]);
+      document.body.getElementsByTagName("header")[0].classList.add(classes[color]);
+      document.body.getElementsByTagName("header")[0].classList.remove(classes[changeColorOnScroll.color]);
       imageRef.current.src = LogoWhite;
     }
   };

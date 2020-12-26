@@ -10,11 +10,15 @@ import InputLabel from "@material-ui/core/InputLabel";
 import Input from "@material-ui/core/Input";
 
 import styles from "assets/jss/material-kit-react/components/customInputStyle.js";
-import { SearchInputContextProvider, SearchInputConsumer } from "contexts/search.js";
+import {
+  SearchInputContextProvider,
+  SearchInputConsumer,
+} from "contexts/search.js";
 
 const useStyles = makeStyles(styles);
 
 export default function CustomInput(props) {
+  console.log("???")
   const classes = useStyles();
   const {
     formControlProps,
@@ -28,7 +32,6 @@ export default function CustomInput(props) {
     success,
   } = props;
   const hi = (e) => {
-    console.log(e.target.value);
     setSearchInput(e.target.value);
   };
 
@@ -62,40 +65,36 @@ export default function CustomInput(props) {
   }
 
   return (
-        <FormControl {...formControlProps} className={formControlClasses}>
-          {labelText !== undefined ? (
-            <InputLabel
-              className={classes.labelRoot + " " + labelClasses}
-              htmlFor={id}
-              {...labelProps}
-            >
-              {labelText}
-            </InputLabel>
-          ) : null}
+    <FormControl {...formControlProps} className={formControlClasses}>
+      {labelText !== undefined ? (
+        <InputLabel
+          className={classes.labelRoot + " " + labelClasses}
+          htmlFor={id}
+          {...labelProps}
+        >
+          {labelText}
+        </InputLabel>
+      ) : null}
       <SearchInputConsumer>
-
-         {({actions})=>{
-           console.log(actions)
-           return (
-           
+        {({ actions }) => {
+          return (
             <Input
-            classes={{
-              input: inputClasses,
-              root: marginTop,
-              disabled: classes.disabled,
-              underline: underlineClasses,
-            }}
-            onChange={e=>{
-              console.log(e.target.value)
-              actions.setInput(e.target.value);
-            }}
-            id={id}
-            {...inputProps}
-          />
-         )}}
+              classes={{
+                input: inputClasses,
+                root: marginTop,
+                disabled: classes.disabled,
+                underline: underlineClasses,
+              }}
+              onChange={(e) => {
+                actions.setInput(e.target.value);
+              }}
+              id={id}
+              {...inputProps}
+            />
+          );
+        }}
       </SearchInputConsumer>
-
-        </FormControl>
+    </FormControl>
   );
 }
 

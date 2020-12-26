@@ -19,8 +19,8 @@ const useStyles = makeStyles(styles);
 
 export default function Components(props) {
   const classes = useStyles();
-  const { searchInput, ...rest } = props;
-  console.log("Componet searchInput : " + searchInput);
+  const { ...rest } = props;
+
 
   const { loading, error, data, fetchMore } = useQuery(LOGIN_QUERY, {
     variables: {
@@ -43,7 +43,7 @@ export default function Components(props) {
                 "access_token",
                 data.userCheck.access_token
               );
-              return <SectionBasics searchInput={searchInput} />;
+              return <SectionBasics />;
             })()}
           </div>
         )}

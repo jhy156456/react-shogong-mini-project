@@ -1,4 +1,4 @@
-import React, { useState, useEffect,useCallback,useContext } from "react";
+import React, { useState, useEffect, useCallback, useContext } from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 // import AutocompleteSelect from "components/common/AutocompleteSelect.js"
@@ -15,8 +15,11 @@ import { useQuery, useLazyQuery } from "@apollo/client";
 import { LIST_STORES_QUERY } from "lib/api/posts.js";
 import { TextField, Typography, Box } from "@material-ui/core";
 import Autocomplete from "components/common/AutocompleteSelect";
-import SearchInputContext from "contexts/search.js"
-import { SearchInputContextProvider, SearchInputConsumer } from "contexts/search.js";
+import SearchInputContext from "contexts/search.js";
+import {
+  SearchInputContextProvider,
+  SearchInputConsumer,
+} from "contexts/search.js";
 
 const useStyles = makeStyles((theme) => ({
   ...styles,
@@ -37,9 +40,6 @@ const states = [
 ];
 
 export default function SectionBasics() {
-  const { searchInput } = useContext(SearchInputContext);
-
-  console.log("sectionBaseics searchInput : " + searchInput);
   const { loading, error, data, fetchMore } = useQuery(LIST_STORES_QUERY, {
     variables: {
       page: 0,
@@ -65,7 +65,6 @@ export default function SectionBasics() {
     });
   };
 
-
   const handleOnScroll = useCallback(() => {
     var scrollTop =
       (document.documentElement && document.documentElement.scrollTop) ||
@@ -79,14 +78,13 @@ export default function SectionBasics() {
     if (scrolledToBottom) {
       onLoadMore();
     }
-  },[data]);
+  }, [data]);
   useEffect(() => {
     window.addEventListener("scroll", handleOnScroll);
     return () => window.removeEventListener("scroll", handleOnScroll);
   }, [data]);
 
-  const onLoadMore=useCallback(()=> {
-    console.log(data)
+  const onLoadMore = useCallback(() => {
     fetchMore({
       variables: {
         page: data.adminUser.result.length,
@@ -108,8 +106,9 @@ export default function SectionBasics() {
         return newData;
       },
     });
-  },[data]);
+  }, [data]);
   if (loading) return <p>불러오는중..</p>;
+  console.log(data);
 
   return (
     <div className={classes.sections}>
@@ -168,27 +167,23 @@ export default function SectionBasics() {
                 </GridItem>
               </GridContainer>
             </GridItem>
-            <GridItem xs={12} sm={12} md={6}></GridItem>
-            <SearchInputContextProvider>
-              <SearchInputConsumer>
-                      {({state})=>
-                        console.log(state)
-                      }
-              </SearchInputConsumer>
-            {/* {loading ? (
-              <p>불러오는중..</p>
-            ) : (
-              data && (
-                <>
-                  {data.adminUser.result.map((post) => (
-                    <GridItem xs={12} sm={12} md={6} key={post.id}>
-                      <CustomTabs headerColor="primary" post={post} />
-                    </GridItem>
-                  ))}
-                </>
-              )
-            )} */}
-            </SearchInputContextProvider>
+            <GridItem xs={12} sm={12} md={6} />
+            <SearchInputConsumer>
+              {(value) => {
+                const filterData = data.adminUser.result.filter((c) => {
+                  return (
+                    c.business.license_name.indexOf(value.state.input) > -1
+                  );
+                });
+
+                return filterData.map((post) => (
+                  <GridItem xs={12} sm={12} md={6} key={post.id}>
+                    <CustomTabs headerColor="primary" post={post} />
+                  </GridItem>
+                ));
+              }}
+            </SearchInputConsumer>
+
             {/* <GridItem xs={12} sm={12} md={6}>
               <CustomTabs headerColor="primary" />
             </GridItem>
