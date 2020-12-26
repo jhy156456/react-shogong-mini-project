@@ -3,32 +3,21 @@ import React, { useEffect, useState } from "react";
 import classNames from "classnames";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
-// @material-ui/icons
-import Camera from "@material-ui/icons/Camera";
-import Palette from "@material-ui/icons/Palette";
-import Favorite from "@material-ui/icons/Favorite";
 // core components
 import SectionCarousel from "components/Sections/SectionCarousel.js";
 import Button from "components/CustomButtons/Button.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
-import NavPills from "components/NavPills/NavPills.js";
 import Parallax from "components/Parallax/Parallax.js";
 
 import profile from "assets/img/logo.png";
 import {
-  Avatar,
   Box,
-  Card,
-  CardContent,
   Divider,
   Grid,
   Typography,
 } from "@material-ui/core";
-import CardHeader from "@material-ui/core/CardHeader";
-import AccessTimeIcon from "@material-ui/icons/AccessTime";
-import GetAppIcon from "@material-ui/icons/GetApp";
 import ChatBubbleOutlineIcon from "@material-ui/icons/ChatBubbleOutline";
 import PhoneIcon from "@material-ui/icons/Phone";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
@@ -38,17 +27,9 @@ import { useParams } from "react-router-dom";
 import { Query } from "react-apollo";
 import "./hi.css";
 
-import studio1 from "assets/img/examples/studio-1.jpg";
-import studio2 from "assets/img/examples/studio-2.jpg";
-import studio3 from "assets/img/examples/studio-3.jpg";
-import studio4 from "assets/img/examples/studio-4.jpg";
-import studio5 from "assets/img/examples/studio-5.jpg";
 import work1 from "assets/img/examples/olu-eletu.jpg";
-import work2 from "assets/img/examples/clem-onojeghuo.jpg";
-import work3 from "assets/img/examples/cynthia-del-rio.jpg";
-import work4 from "assets/img/examples/mariya-georgieva.jpg";
-import work5 from "assets/img/examples/clem-onojegaw.jpg";
 import SinglineGridList from "./SingleLineGridList";
+import Comments from "components/comment/Comments";
 
 const useStyles = makeStyles(styles);
 
@@ -104,7 +85,7 @@ export default function ProfilePage(props) {
                             <div className={classes.profile}>
                               <div>
                                 <img
-                                  src={profile}
+                                  src={work1}
                                   alt="..."
                                   className={imageClasses}
                                 />
@@ -273,6 +254,12 @@ export default function ProfilePage(props) {
                         ) : (
                           <SectionCarousel />
                         )}
+                        <Divider variant="fullWidth" />
+                        <Box mb={3} />
+                        <div className={classes.title}>
+                          <h4 className={classes.h3Style}>거래후기</h4>
+                        </div>
+                        <Comments />
                       </div>
                     </div>
                   </div>

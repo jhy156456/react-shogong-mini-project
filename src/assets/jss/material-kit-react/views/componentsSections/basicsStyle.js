@@ -25,6 +25,7 @@ const basicsStyle = {
     height: "17px",
     color: "#FFFFFF"
   },
+  
   ...customCheckboxRadioSwitch
 };
 

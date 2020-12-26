@@ -112,9 +112,9 @@ export default function CustomTabs(props) {
       >
         <Card plain={plainTabs} >
           <CardHeader  plain={plainTabs}>
-            <Grid container justify="space-around" noWrap>
+            <Grid container justify="space-around">
               <Grid item xs={4} sm={3} md={3}>
-                <Typography align="center" variant="body1" style={{fontWeight:'bold'}} align="left">
+                <Typography align="center" variant="body1" style={{fontWeight:'bold'}} align="left" noWrap>
                   {business.license_name}
                 </Typography>
               </Grid>
@@ -126,17 +126,17 @@ export default function CustomTabs(props) {
               </Grid>
             </Grid>
           </CardHeader>
-          <Box className={classes.paper2} border={1}>안녕하세요페이퍼에요</Box>
+          <Box className={classes.paper2} border={1}><Typography variant="h6" className={classes.h6Style}>안녕하세요페이퍼에요</Typography></Box>
           <CardBody>
             <Grid container justify="space-around" className={classes.paper}>
               <Grid item xs={3} sm={4} md={3}>
-                <Typography variant="h6" className={classes.h6Style}>주요 생산 품목</Typography>
+                <Typography variant="h6" className={classes.h6Style} noWrap>주요 생산 품목</Typography>
               </Grid>
               <Grid item xs={3} sm={4} md={3}>
                 <Typography variant="h6"className={classes.h6Style}>카테고리</Typography>
               </Grid>
               <Grid item xs={3} sm={4} md={3}>
-                <Typography variant="h6"className={classes.h6Style}>주요 생산 품목</Typography>
+                <Typography variant="h6"className={classes.h6Style} noWrap>주요 생산 품목</Typography>
               </Grid>
             </Grid>
             <Grid container justify="space-around" className={classes.paper}>
@@ -144,7 +144,7 @@ export default function CustomTabs(props) {
                 <Typography variant="h6"className={classes.h6Style}>주소</Typography>
               </Grid>
               <Grid item xs={3} sm={4} md={3}>
-                <Typography variant="h6"className={classes.h6Style}>최소생산수량</Typography>
+                <Typography variant="h6"className={classes.h6Style} noWrap>최소생산수량</Typography>
               </Grid>
               <Grid item xs={3} sm={4} md={3}>
                 <Typography variant="h6"className={classes.h6Style}>규모</Typography>

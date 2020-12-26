@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 // import AutocompleteSelect from "components/common/AutocompleteSelect.js"
@@ -12,14 +12,64 @@ import CustomTabs from "components/CustomTabs/CustomTabs.js";
 import styles from "assets/jss/material-kit-react/views/componentsSections/basicsStyle.js";
 import { Query } from "react-apollo";
 import { LIST_STORES_QUERY } from "lib/api/posts.js";
-import { Typography } from "@material-ui/core";
-
-const useStyles = makeStyles(styles);
+import { TextField, Typography, Box } from "@material-ui/core";
+import Autocomplete from "components/common/AutocompleteSelect";
+const useStyles = makeStyles((theme) => ({
+  ...styles,
+}));
+const states = [
+  {
+    value: "alabama",
+    label: "Alabama",
+  },
+  {
+    value: "new-york",
+    label: "New York",
+  },
+  {
+    value: "san-francisco",
+    label: "San Francisco",
+  },
+];
 
 export default function SectionBasics() {
+  console.log("함수호출");
   const classes = useStyles();
   const [checked, setChecked] = React.useState([24, 22]);
+  const [values, setValues] = useState({
+    firstName: "Katarina",
+    lastName: "Smith",
+    email: "demo@devias.io",
+    phone: "",
+    state: "Alabama",
+    country: "USA",
+  });
+  const handleChange = (event) => {
+    setValues({
+      ...values,
+      [event.target.name]: event.target.value,
+    });
+  };
+  const handleOnScroll = () => {
+    var scrollTop =
+      (document.documentElement && document.documentElement.scrollTop) ||
+      document.body.scrollTop;
+    var scrollHeight =
+      (document.documentElement && document.documentElement.scrollHeight) ||
+      document.body.scrollHeight;
+    var clientHeight =
+      document.documentElement.clientHeight || window.innerHeight;
+    var scrolledToBottom = Math.ceil(scrollTop + clientHeight) >= scrollHeight;
+    if (scrolledToBottom) {
+      onLoadMore();
+    }
+  };
+  useEffect(() => {
+    window.addEventListener("scroll", handleOnScroll);
+    return () => window.removeEventListener("scroll", handleOnScroll);
+  }, []);
 
+  let onLoadMore;
   return (
     <div className={classes.sections}>
       <div className={classes.container}>
@@ -27,10 +77,57 @@ export default function SectionBasics() {
           <h2>Basic Elements</h2>
         </div> */}
         <div id="buttons">
-          <GridContainer justify="space-around">
-            <GridItem xs={12} sm={12} md={12}>
+          <GridContainer justify="space-around" spacing={0}>
+            <GridItem xs={12} sm={12} md={6}>
               <Typography>상세필터</Typography>
+              <Box mb={2} />
             </GridItem>
+            <GridItem xs={12} sm={12} md={6} />
+            <GridItem xs={12} sm={12} md={6}>
+              <GridContainer justify="flex-start">
+                <GridItem xs={6} sm={6} md={6}>
+                  {" "}
+                  <TextField
+                    fullWidth
+                    label="지역"
+                    name="state"
+                    onChange={handleChange}
+                    required
+                    select
+                    SelectProps={{ native: true }}
+                    value={values.state}
+                    variant="outlined"
+                  >
+                    {states.map((option) => (
+                      <option key={option.value} value={option.value}>
+                        {option.label}
+                      </option>
+                    ))}
+                  </TextField>
+                </GridItem>
+                <GridItem xs={6} sm={6} md={6}>
+                  {" "}
+                  <TextField
+                    fullWidth
+                    label="생산방식"
+                    name="state"
+                    onChange={handleChange}
+                    required
+                    select
+                    SelectProps={{ native: true }}
+                    value={values.state}
+                    variant="outlined"
+                  >
+                    {states.map((option) => (
+                      <option key={option.value} value={option.value}>
+                        {option.label}
+                      </option>
+                    ))}
+                  </TextField>
+                </GridItem>
+              </GridContainer>
+            </GridItem>
+            <GridItem xs={12} sm={12} md={6}></GridItem>
             <Query
               query={LIST_STORES_QUERY}
               variables={{
@@ -39,20 +136,41 @@ export default function SectionBasics() {
                 required: true,
               }}
             >
-              {({ data, loading }) =>
-                loading ? (
-                  <p>불러오는중..</p>
-                ) : (
+              {({ data, loading, fetchMore }) => {
+                onLoadMore = () => {
+                  fetchMore({
+                    variables: {
+                      page: data.adminUser.result.length,
+                      user_id: "shogong",
+                      required: true,
+                    },
+                    updateQuery: (prev, { fetchMoreResult }) => {
+                      if (!fetchMoreResult) return prev;
+                      const newData = {
+                        ...prev,
+                        adminUser: {
+                          ...prev.adminUser,
+                          result: [
+                            ...prev.adminUser.result,
+                            ...fetchMoreResult.adminUser.result,
+                          ],
+                        },
+                      };
+                      return newData;
+                    },
+                  });
+                };
+                if (loading) return <p>불러오는중..</p>;
+                return (
                   <>
-                    {console.log(data.adminUser)}
                     {data.adminUser.result.map((post) => (
                       <GridItem xs={12} sm={12} md={6} key={post.id}>
                         <CustomTabs headerColor="primary" post={post} />
                       </GridItem>
                     ))}
                   </>
-                )
-              }
+                );
+              }}
             </Query>
 
             {/* <GridItem xs={12} sm={12} md={6}>
