@@ -1,4 +1,4 @@
-import React,{useRef} from "react";
+import React, { useRef } from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // nodejs library to set properties for components
@@ -8,7 +8,8 @@ import { makeStyles, fade } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
-import Button from "@material-ui/core/Button";
+//import Button from "@material-ui/core/Button";
+import Button from "components/CustomButtons/Button.js";
 import Hidden from "@material-ui/core/Hidden";
 import Drawer from "@material-ui/core/Drawer";
 import InputBase from "@material-ui/core/InputBase";
@@ -19,6 +20,9 @@ import styles from "assets/jss/material-kit-react/components/headerStyle.js";
 import SearchIcon from "@material-ui/icons/Search";
 import LogoBlack from "assets/img/logo.png";
 import LogoWhite from "assets/img/logo-white.png";
+import Search from "@material-ui/icons/Search";
+import CustomInput from "components/CustomInput/CustomInput.js";
+
 const useStyles = makeStyles((theme) => ({
   search: {
     position: "relative",
@@ -64,6 +68,18 @@ const useStyles = makeStyles((theme) => ({
     overflowX: "auto",
   },
   ...styles,
+  formControl: {
+    margin: "0 !important",
+    paddingTop: "0",
+  },
+  inputRootCustomClasses: {
+    margin: "0!important",
+  },
+  searchIcon: {
+    width: "20px",
+    height: "20px",
+    color: "inherit",
+  },
 }));
 
 export default function Header(props) {
@@ -83,7 +99,7 @@ export default function Header(props) {
     setMobileOpen(!mobileOpen);
   };
   const headerColorChange = () => {
-    const { color, changeColorOnScroll } = props;
+    const { color, changeColorOnScroll,hi } = props;
     const windowsScrollTop = window.pageYOffset;
     if (windowsScrollTop > changeColorOnScroll.height) {
       //변경상태
@@ -93,7 +109,7 @@ export default function Header(props) {
       document.body
         .getElementsByTagName("header")[0]
         .classList.add(classes[changeColorOnScroll.color]);
-        imageRef.current.src = LogoBlack;
+      imageRef.current.src = LogoBlack;
     } else {
       //초기상태
       document.body
@@ -102,8 +118,7 @@ export default function Header(props) {
       document.body
         .getElementsByTagName("header")[0]
         .classList.remove(classes[changeColorOnScroll.color]);
-        imageRef.current.src = LogoWhite;
-
+      imageRef.current.src = LogoWhite;
     }
   };
   const { color, rightLinks, leftLinks, brand, fixed, absolute } = props;
@@ -116,8 +131,10 @@ export default function Header(props) {
   const imageClasses = classNames(classes.imgLogo);
 
   const imageRef = useRef(null);
-  const brandComponent = <img src={LogoWhite} alt="..." className={imageClasses} ref={imageRef} />;
-  
+  const brandComponent = (
+    <img src={LogoWhite} alt="..." className={imageClasses} ref={imageRef} />
+  );
+
   //  <Button className={classes.title}></Button>;
   return (
     <AppBar className={appBarClasses}>
@@ -132,7 +149,25 @@ export default function Header(props) {
             brandComponent
           )}
         </div>
-
+        <div>
+          <CustomInput
+            white
+            inputRootCustomClasses={classes.inputRootCustomClasses}
+            formControlProps={{
+              className: classes.formControl,
+            }}
+            inputProps={{
+              placeholder: "공장을 검색하세요",
+              inputProps: {
+                "aria-label": "Search",
+                className: classes.searchInput,
+              },
+            }}
+          />
+          <Button justIcon  color="white" size="sm">
+            <Search className={classes.searchIcon} />
+          </Button>
+        </div>
         <Hidden smDown implementation="css">
           {rightLinks}
         </Hidden>

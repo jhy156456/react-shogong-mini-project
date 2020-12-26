@@ -6,9 +6,7 @@ import PropTypes from "prop-types";
 
 // material-ui components
 import { makeStyles } from "@material-ui/core/styles";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
-import Icon from "@material-ui/core/Icon";
+
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
@@ -17,14 +15,17 @@ import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
+// icon
+import PhoneIcon from "@material-ui/icons/Phone";
+import ChatBubbleOutlineIcon from "@material-ui/icons/ChatBubbleOutline";
 import { Link } from "react-router-dom";
 import styles from "assets/jss/material-kit-react/components/customTabsStyle.js";
 import CardActionArea from "@material-ui/core/CardActionArea";
-import Box from "@material-ui/core/Box"
+import Box from "@material-ui/core/Box";
 const useStyles = makeStyles((theme) => ({
   paper: {
     margin: theme.spacing(1),
-    padding: theme.spacing(1),
+    // padding: theme.spacing(1),
   },
   paper2: {
     padding: theme.spacing(0.5),
@@ -85,8 +86,16 @@ const useStyles = makeStyles((theme) => ({
       letterSpacing: "normal !important",
     },
   },
-  h6Style:{
-    fontSize:'0.7rem'
+  h6Style: {
+    fontSize: "0.7rem",
+  },
+  verticalIcon:{
+    verticalAlign:"middle"
+  },
+  iconContainer:{
+    marginLeft:theme.spacing(2),
+    marginBottom:theme.spacing(1)
+    // padding: theme.spacing(1),
   }
 }));
 
@@ -110,45 +119,106 @@ export default function CustomTabs(props) {
         to={`/store/${props.post.id}`}
         style={{ textDecoration: "none", color: "white" }}
       >
-        <Card plain={plainTabs} >
-          <CardHeader  plain={plainTabs}>
+        <Card plain={plainTabs}>
+          <CardHeader plain={plainTabs}>
             <Grid container justify="space-around">
               <Grid item xs={4} sm={3} md={3}>
-                <Typography align="center" variant="body1" style={{fontWeight:'bold'}} align="left" noWrap>
+                <Typography
+                  align="center"
+                  variant="body1"
+                  style={{ fontWeight: "bold" }}
+                  align="left"
+                  noWrap
+                >
                   {business.license_name}
                 </Typography>
               </Grid>
-              <Grid item xs={3} sm={3} md={3} style={{ margin: "auto" }} >
-                <Typography variant="h6" className={classes.h6Style}> 원단공장</Typography>
+              <Grid item xs={3} sm={3} md={3} style={{ margin: "auto" }}>
+                <Typography variant="h6" className={classes.h6Style}>
+                  {" "}
+                  원단공장
+                </Typography>
               </Grid>
               <Grid item xs={3} sm={3} md={3}>
                 <FavoriteBorderIcon style={{ float: "right" }} />
               </Grid>
             </Grid>
           </CardHeader>
-          <Box className={classes.paper2} border={1}><Typography variant="h6" className={classes.h6Style}>안녕하세요페이퍼에요</Typography></Box>
+          <Box className={classes.paper2} border={1}>
+            <Typography variant="h6" className={classes.h6Style}>
+              안녕하세요페이퍼에요
+            </Typography>
+          </Box>
           <CardBody>
             <Grid container justify="space-around" className={classes.paper}>
-              <Grid item xs={3} sm={4} md={3}>
-                <Typography variant="h6" className={classes.h6Style} noWrap>주요 생산 품목</Typography>
+              <Grid item xs={3} sm={3} md={3}>
+                <Typography variant="h6" className={classes.h6Style} noWrap>
+                  주요 생산 품목
+                </Typography>
               </Grid>
-              <Grid item xs={3} sm={4} md={3}>
-                <Typography variant="h6"className={classes.h6Style}>카테고리</Typography>
+              <Grid item xs={3} sm={3} md={3}>
+                <Typography variant="h6" className={classes.h6Style}>
+                  카테고리
+                </Typography>
               </Grid>
-              <Grid item xs={3} sm={4} md={3}>
-                <Typography variant="h6"className={classes.h6Style} noWrap>주요 생산 품목</Typography>
+              <Grid item xs={3} sm={3} md={3}>
+                <Typography variant="h6" className={classes.h6Style} noWrap>
+                  주요 생산 품목
+                </Typography>
               </Grid>
             </Grid>
             <Grid container justify="space-around" className={classes.paper}>
-              <Grid item xs={3} sm={4} md={3}>
-                <Typography variant="h6"className={classes.h6Style}>주소</Typography>
+              <Grid item xs={3} sm={3} md={3}>
+                <Typography variant="h6" className={classes.h6Style}>
+                  주소
+                </Typography>
               </Grid>
-              <Grid item xs={3} sm={4} md={3}>
-                <Typography variant="h6"className={classes.h6Style} noWrap>최소생산수량</Typography>
+              <Grid item xs={3} sm={3} md={3}>
+                <Typography variant="h6" className={classes.h6Style} noWrap>
+                  최소생산수량
+                </Typography>
               </Grid>
-              <Grid item xs={3} sm={4} md={3}>
-                <Typography variant="h6"className={classes.h6Style}>규모</Typography>
+              <Grid item xs={3} sm={3} md={3}>
+                <Typography variant="h6" className={classes.h6Style}>
+                  규모
+                </Typography>
               </Grid>
+            </Grid>
+
+            <Grid container justify="flex-start" spacing={2} className={classes.iconContainer}>
+              <Grid className={classes.statsItem}  item   >
+                <PhoneIcon
+                  className={classes.verticalIcon}
+                  color="action"
+                  fontSize="small"
+                />
+                <Typography
+                  color="textSecondary"
+                  display="inline"
+                  variant="h6"
+                  className={classes.h6Style}
+                  style={{ verticalAlign: "middle" }}
+                >
+                  3
+                </Typography>
+              </Grid>
+              <Grid className={classes.statsItem}  item  >
+                <ChatBubbleOutlineIcon
+                  className={classes.verticalIcon}
+                  color="action"
+                  fontSize="small"
+                />
+                <Typography
+                  color="textSecondary"
+                  display="inline"
+                  variant="h6"
+                  className={classes.h6Style}
+                  style={{ verticalAlign: "middle" }}
+                >
+                  14
+                </Typography>
+              </Grid>
+              <Grid className={classes.statsItem}  item xs={3} sm={4} md={3}></Grid>
             </Grid>
           </CardBody>
         </Card>

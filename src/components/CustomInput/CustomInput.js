@@ -1,4 +1,4 @@
-import React from "react";
+import React, { createContext, useState, useContext } from "react";
 // nodejs library to set properties for components
 import PropTypes from "prop-types";
 // nodejs library that concatenates classes
@@ -10,6 +10,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 import Input from "@material-ui/core/Input";
 
 import styles from "assets/jss/material-kit-react/components/customInputStyle.js";
+import { SearchInputContextProvider, SearchInputConsumer } from "contexts/search.js";
 
 const useStyles = makeStyles(styles);
 
@@ -24,25 +25,31 @@ export default function CustomInput(props) {
     error,
     white,
     inputRootCustomClasses,
-    success
+    success,
   } = props;
+  const hi = (e) => {
+    console.log(e.target.value);
+    setSearchInput(e.target.value);
+  };
+
+  const [searchInput, setSearchInput] = useState("");
 
   const labelClasses = classNames({
     [" " + classes.labelRootError]: error,
-    [" " + classes.labelRootSuccess]: success && !error
+    [" " + classes.labelRootSuccess]: success && !error,
   });
   const underlineClasses = classNames({
     [classes.underlineError]: error,
     [classes.underlineSuccess]: success && !error,
     [classes.underline]: true,
-    [classes.whiteUnderline]: white
+    [classes.whiteUnderline]: white,
   });
   const marginTop = classNames({
-    [inputRootCustomClasses]: inputRootCustomClasses !== undefined
+    [inputRootCustomClasses]: inputRootCustomClasses !== undefined,
   });
   const inputClasses = classNames({
     [classes.input]: true,
-    [classes.whiteInput]: white
+    [classes.whiteInput]: white,
   });
   var formControlClasses;
   if (formControlProps !== undefined) {
@@ -53,28 +60,42 @@ export default function CustomInput(props) {
   } else {
     formControlClasses = classes.formControl;
   }
+
   return (
-    <FormControl {...formControlProps} className={formControlClasses}>
-      {labelText !== undefined ? (
-        <InputLabel
-          className={classes.labelRoot + " " + labelClasses}
-          htmlFor={id}
-          {...labelProps}
-        >
-          {labelText}
-        </InputLabel>
-      ) : null}
-      <Input
-        classes={{
-          input: inputClasses,
-          root: marginTop,
-          disabled: classes.disabled,
-          underline: underlineClasses
-        }}
-        id={id}
-        {...inputProps}
-      />
-    </FormControl>
+        <FormControl {...formControlProps} className={formControlClasses}>
+          {labelText !== undefined ? (
+            <InputLabel
+              className={classes.labelRoot + " " + labelClasses}
+              htmlFor={id}
+              {...labelProps}
+            >
+              {labelText}
+            </InputLabel>
+          ) : null}
+      <SearchInputConsumer>
+
+         {({actions})=>{
+           console.log(actions)
+           return (
+           
+            <Input
+            classes={{
+              input: inputClasses,
+              root: marginTop,
+              disabled: classes.disabled,
+              underline: underlineClasses,
+            }}
+            onChange={e=>{
+              console.log(e.target.value)
+              actions.setInput(e.target.value);
+            }}
+            id={id}
+            {...inputProps}
+          />
+         )}}
+      </SearchInputConsumer>
+
+        </FormControl>
   );
 }
 
@@ -87,5 +108,5 @@ CustomInput.propTypes = {
   inputRootCustomClasses: PropTypes.string,
   error: PropTypes.bool,
   success: PropTypes.bool,
-  white: PropTypes.bool
+  white: PropTypes.bool,
 };

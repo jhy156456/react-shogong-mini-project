@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useCallback,useContext } from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 // import AutocompleteSelect from "components/common/AutocompleteSelect.js"
@@ -11,9 +11,13 @@ import CustomTabs from "components/CustomTabs/CustomTabs.js";
 
 import styles from "assets/jss/material-kit-react/views/componentsSections/basicsStyle.js";
 import { Query } from "react-apollo";
+import { useQuery, useLazyQuery } from "@apollo/client";
 import { LIST_STORES_QUERY } from "lib/api/posts.js";
 import { TextField, Typography, Box } from "@material-ui/core";
 import Autocomplete from "components/common/AutocompleteSelect";
+import SearchInputContext from "contexts/search.js"
+import { SearchInputContextProvider, SearchInputConsumer } from "contexts/search.js";
+
 const useStyles = makeStyles((theme) => ({
   ...styles,
 }));
@@ -33,7 +37,17 @@ const states = [
 ];
 
 export default function SectionBasics() {
-  console.log("함수호출");
+  const { searchInput } = useContext(SearchInputContext);
+
+  console.log("sectionBaseics searchInput : " + searchInput);
+  const { loading, error, data, fetchMore } = useQuery(LIST_STORES_QUERY, {
+    variables: {
+      page: 0,
+      user_id: "shogong",
+      required: true,
+    },
+  });
+
   const classes = useStyles();
   const [checked, setChecked] = React.useState([24, 22]);
   const [values, setValues] = useState({
@@ -50,7 +64,9 @@ export default function SectionBasics() {
       [event.target.name]: event.target.value,
     });
   };
-  const handleOnScroll = () => {
+
+
+  const handleOnScroll = useCallback(() => {
     var scrollTop =
       (document.documentElement && document.documentElement.scrollTop) ||
       document.body.scrollTop;
@@ -63,13 +79,38 @@ export default function SectionBasics() {
     if (scrolledToBottom) {
       onLoadMore();
     }
-  };
+  },[data]);
   useEffect(() => {
     window.addEventListener("scroll", handleOnScroll);
     return () => window.removeEventListener("scroll", handleOnScroll);
-  }, []);
+  }, [data]);
 
-  let onLoadMore;
+  const onLoadMore=useCallback(()=> {
+    console.log(data)
+    fetchMore({
+      variables: {
+        page: data.adminUser.result.length,
+        user_id: "shogong",
+        required: true,
+      },
+      updateQuery: (prev, { fetchMoreResult }) => {
+        if (!fetchMoreResult) return prev;
+        const newData = {
+          ...prev,
+          adminUser: {
+            ...prev.adminUser,
+            result: [
+              ...prev.adminUser.result,
+              ...fetchMoreResult.adminUser.result,
+            ],
+          },
+        };
+        return newData;
+      },
+    });
+  },[data]);
+  if (loading) return <p>불러오는중..</p>;
+
   return (
     <div className={classes.sections}>
       <div className={classes.container}>
@@ -128,51 +169,26 @@ export default function SectionBasics() {
               </GridContainer>
             </GridItem>
             <GridItem xs={12} sm={12} md={6}></GridItem>
-            <Query
-              query={LIST_STORES_QUERY}
-              variables={{
-                page: 0,
-                user_id: "shogong",
-                required: true,
-              }}
-            >
-              {({ data, loading, fetchMore }) => {
-                onLoadMore = () => {
-                  fetchMore({
-                    variables: {
-                      page: data.adminUser.result.length,
-                      user_id: "shogong",
-                      required: true,
-                    },
-                    updateQuery: (prev, { fetchMoreResult }) => {
-                      if (!fetchMoreResult) return prev;
-                      const newData = {
-                        ...prev,
-                        adminUser: {
-                          ...prev.adminUser,
-                          result: [
-                            ...prev.adminUser.result,
-                            ...fetchMoreResult.adminUser.result,
-                          ],
-                        },
-                      };
-                      return newData;
-                    },
-                  });
-                };
-                if (loading) return <p>불러오는중..</p>;
-                return (
-                  <>
-                    {data.adminUser.result.map((post) => (
-                      <GridItem xs={12} sm={12} md={6} key={post.id}>
-                        <CustomTabs headerColor="primary" post={post} />
-                      </GridItem>
-                    ))}
-                  </>
-                );
-              }}
-            </Query>
-
+            <SearchInputContextProvider>
+              <SearchInputConsumer>
+                      {({state})=>
+                        console.log(state)
+                      }
+              </SearchInputConsumer>
+            {/* {loading ? (
+              <p>불러오는중..</p>
+            ) : (
+              data && (
+                <>
+                  {data.adminUser.result.map((post) => (
+                    <GridItem xs={12} sm={12} md={6} key={post.id}>
+                      <CustomTabs headerColor="primary" post={post} />
+                    </GridItem>
+                  ))}
+                </>
+              )
+            )} */}
+            </SearchInputContextProvider>
             {/* <GridItem xs={12} sm={12} md={6}>
               <CustomTabs headerColor="primary" />
             </GridItem>

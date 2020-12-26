@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "components/Header/Header.js";
 // pages for this product
 import Components from "views/Components/Components.js";
@@ -12,26 +12,28 @@ import Footer from "components/Footer/Footer.js";
 var hist = createBrowserHistory();
 
 function App() {
+
   return (
     <div>
       {/* style={{ paddingLeft: 40, paddingRight: 40 }} */}
-
-
       <Router history={hist}>
-      <Header
-        brand="쇼핑을공장에서"
-        rightLinks={<HeaderLinks />}
-        fixed
-        color="transparent"
-        changeColorOnScroll={{
-          height: 200,
-          color: "white"
-        }}
-      />
+        <Header
+          brand="쇼핑을공장에서"
+          rightLinks={<HeaderLinks />}
+          fixed
+          color="transparent"
+          changeColorOnScroll={{
+            height: 200,
+            color: "white",
+          }}
+        />
         <Switch>
           <Route path="/landing-page" component={LandingPage} />
           <Route path="/store/:id" component={ProfilePage} />
-          <Route path="/" component={Components} />
+          <Route
+            path="/"
+            render={() => <Components />}
+          />
         </Switch>
       </Router>
 
