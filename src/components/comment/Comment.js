@@ -7,33 +7,37 @@ import {
   ListItemText,
   ListItemAvatar,
   Avatar,
-  Typography
+  Typography,
 } from "@material-ui/core";
 // import Faker from "faker";
 import work1 from "assets/img/examples/olu-eletu.jpg";
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
-    backgroundColor: theme.palette.background.paper
+    backgroundColor: theme.palette.background.paper,
   },
   fonts: {
-    fontWeight: "bold"
+    fontWeight: "bold",
   },
   inline: {
-    display: "inline"
-  }
+    display: "inline",
+  },
 }));
 
 const Comment = ({ comments }) => {
   const classes = useStyles();
   return (
     <List className={classes.root}>
-      {comments.map(comment => {
+      {comments.map((comment) => {
         console.log("Comment", comment);
         return (
           <React.Fragment key={comment.id}>
-            <ListItem key={comment.id} alignItems="flex-start" disableGutters={false}>
-      
+            <ListItem
+              key={comment.id}
+              alignItems="flex-start"
+              disableGutters={false}
+              classes={{ ListItem: "MuiListItem-gutters" }}
+            >
               <ListItemText
                 primary={
                   <Typography className={classes.fonts}>

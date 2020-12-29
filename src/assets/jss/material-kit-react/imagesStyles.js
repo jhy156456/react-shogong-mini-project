@@ -1,6 +1,6 @@
 const imagesStyles = {
   imgLogo:{
-    height:"40px"
+    height:"30px"
   },
   imgFluid: {
     maxWidth: "100%",

@@ -1,21 +1,18 @@
 import React, { useState, useEffect, useCallback, useContext } from "react";
-// @material-ui/core components
+//@material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
-// import AutocompleteSelect from "components/common/AutocompleteSelect.js"
-// core components
+import CircularProgress from "@material-ui/core/CircularProgress";
+import { TextField, Typography, Box } from "@material-ui/core";
+//core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
-
-// core components
 import CustomTabs from "components/CustomTabs/CustomTabs.js";
-
+//styles
 import styles from "assets/jss/material-kit-react/views/componentsSections/basicsStyle.js";
-import { Query } from "react-apollo";
+//gql
 import { useQuery, useLazyQuery } from "@apollo/client";
 import { LIST_STORES_QUERY } from "lib/api/posts.js";
-import { TextField, Typography, Box } from "@material-ui/core";
-import Autocomplete from "components/common/AutocompleteSelect";
-import SearchInputContext from "contexts/search.js";
+//context API
 import {
   SearchInputContextProvider,
   SearchInputConsumer,
@@ -107,8 +104,7 @@ export default function SectionBasics() {
       },
     });
   }, [data]);
-  if (loading) return <p>불러오는중..</p>;
-  console.log(data);
+  console.log(JSON.stringify(data));
 
   return (
     <div className={classes.sections}>
@@ -168,21 +164,25 @@ export default function SectionBasics() {
               </GridContainer>
             </GridItem>
             <GridItem xs={12} sm={12} md={6} />
-            <SearchInputConsumer>
-              {(value) => {
-                const filterData = data.adminUser.result.filter((c) => {
-                  return (
-                    c.business.license_name.indexOf(value.state.input) > -1
-                  );
-                });
+            {loading ? (
+              <CircularProgress />
+            ) : (
+              <SearchInputConsumer>
+                {(value) => {
+                  const filterData = data.adminUser.result.filter((c) => {
+                    return (
+                      c.business.license_name.indexOf(value.state.input) > -1
+                    );
+                  });
 
-                return filterData.map((post) => (
-                  <GridItem xs={12} sm={12} md={6} key={post.id}>
-                    <CustomTabs headerColor="primary" post={post} />
-                  </GridItem>
-                ));
-              }}
-            </SearchInputConsumer>
+                  return filterData.map((post) => (
+                    <GridItem xs={12} sm={12} md={6} key={post.id}>
+                      <CustomTabs headerColor="primary" post={post} />
+                    </GridItem>
+                  ));
+                }}
+              </SearchInputConsumer>
+            )}
 
             {/* <GridItem xs={12} sm={12} md={6}>
               <CustomTabs headerColor="primary" />

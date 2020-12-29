@@ -6,13 +6,13 @@ const profilePageStyle = {
   container,
   profile: {
     textAlign: "center",
-    "& img": {
-      maxWidth: "400px",
-      height:'200px',
-      width: "100%",
-      margin: "0 auto",
-      transform: "translate3d(0, -50%, 0)"
-    }
+    // "& img": {
+    //   maxWidth: "400px",
+    //   height:'200px',
+    //   width: "100%",
+    //   margin: "0 auto",
+    //   transform: "translate3d(0, -50%, 0)"
+    // }
   },
   description: {
     margin: "1.071rem auto 0",
@@ -21,7 +21,7 @@ const profilePageStyle = {
     textAlign: "center !important"
   },
   name: {
-    marginTop: "-80px"
+    // marginTop: "-80px"
   },
   ...imagesStyle,
   main: {
@@ -55,7 +55,7 @@ const profilePageStyle = {
     color: "#999"
   },
   navWrapper: {
-    margin: "20px auto 50px auto",
+    margin: "20px auto 20px auto",
     textAlign: "center"
   },
   h3Style:{

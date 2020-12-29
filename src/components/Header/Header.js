@@ -5,9 +5,7 @@ import classNames from "classnames";
 import PropTypes from "prop-types";
 // @material-ui/core components
 import { makeStyles, fade } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import IconButton from "@material-ui/core/IconButton";
+import {AppBar,Toolbar,IconButton,Box} from "@material-ui/core";
 //import Button from "@material-ui/core/Button";
 import Button from "components/CustomButtons/Button.js";
 import Hidden from "@material-ui/core/Hidden";
@@ -148,7 +146,7 @@ export default function Header(props) {
             brandComponent
           )}
         </div>
-        <div>
+        <Box style={{display:'flex'}}>
           <CustomInput
             white
             inputRootCustomClasses={classes.inputRootCustomClasses}
@@ -166,7 +164,7 @@ export default function Header(props) {
           <Button justIcon  color="white" size="sm">
             <Search className={classes.searchIcon} />
           </Button>
-        </div>
+        </Box>
         <Hidden smDown implementation="css">
           {rightLinks}
         </Hidden>

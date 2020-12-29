@@ -26,7 +26,8 @@ export default function SectionCarousel() {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    autoplay: false
+    autoplay: false,
+    
   };
   return (
     <div className={classes.section}>
@@ -37,12 +38,12 @@ export default function SectionCarousel() {
               <Carousel {...settings}>
                 <div>
                   <img src={image1} alt="First slide" className="slick-image" />
-                  <div className="slick-caption">
+                  {/* <div className="slick-caption">
                     <h4>
                       <LocationOn className="slick-icons" />
-                      Yellowstone National Park, United States
+                      첫번쨰~
                     </h4>
-                  </div>
+                  </div> */}
                 </div>
                 <div>
                   <img
@@ -50,21 +51,21 @@ export default function SectionCarousel() {
                     alt="Second slide"
                     className="slick-image"
                   />
-                  <div className="slick-caption">
+                  {/* <div className="slick-caption">
                     <h4>
                       <LocationOn className="slick-icons" />
-                      Somewhere Beyond, United States
+                      두번째~
                     </h4>
-                  </div>
+                  </div> */}
                 </div>
                 <div>
                   <img src={image3} alt="Third slide" className="slick-image" />
-                  <div className="slick-caption">
+                  {/* <div className="slick-caption">
                     <h4>
                       <LocationOn className="slick-icons" />
-                      Yellowstone National Park, United States
+                      세번째~
                     </h4>
-                  </div>
+                  </div> */}
                 </div>
               </Carousel>
             </Card>
