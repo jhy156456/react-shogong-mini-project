@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
 const Comment = ({ comments }) => {
   const classes = useStyles();
   return (
-    <List className={classes.root}>
+    <List  disablePadding={true} classes={{root:classes.root}}>
       {comments.map((comment) => {
         console.log("Comment", comment);
         return (
@@ -35,7 +35,7 @@ const Comment = ({ comments }) => {
             <ListItem
               key={comment.id}
               alignItems="flex-start"
-              disableGutters={false}
+              disableGutters={true}
               classes={{ ListItem: "MuiListItem-gutters" }}
             >
               <ListItemText

@@ -6,6 +6,7 @@ import { TextField, Typography, Box } from "@material-ui/core";
 //core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
+import FactoryCards from "components/FactoryCards/FactoryCard.js";
 import CustomTabs from "components/CustomTabs/CustomTabs.js";
 //styles
 import styles from "assets/jss/material-kit-react/views/componentsSections/basicsStyle.js";
@@ -17,6 +18,12 @@ import {
   SearchInputContextProvider,
   SearchInputConsumer,
 } from "contexts/search.js";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
+import Search from "@material-ui/icons/Search";
+import CustomInput from "components/CustomInput/CustomInput.js";
+import Button from "components/CustomButtons/Button.js";
 
 const useStyles = makeStyles((theme) => ({
   ...styles,
@@ -104,8 +111,22 @@ export default function SectionBasics() {
       },
     });
   }, [data]);
-  console.log(JSON.stringify(data));
+  function ccyFormat(num) {
+    return `${num.toFixed(2)}`;
+  }
 
+  function priceRow(qty, unit) {
+    return qty * unit;
+  }
+
+  function createRow(desc, qty, unit) {
+    const price = priceRow(qty, unit);
+    return { desc, qty, unit, price };
+  }
+
+  function subtotal(items) {
+    return items.map(({ price }) => price).reduce((sum, i) => sum + i, 0);
+  }
   return (
     <div className={classes.sections}>
       <div className={classes.container}>
@@ -115,51 +136,112 @@ export default function SectionBasics() {
         <div id="buttons">
           <GridContainer justify="space-around" spacing={0}>
             <GridItem xs={12} sm={12} md={6}>
-              <Typography>상세필터</Typography>
-              <Box mb={2} />
+              <List>
+                <ListItem>
+                  <Typography variant="body1" style={{ fontWeight: "bold" }}>
+                    주소
+                  </Typography>
+
+                  <Box className={classes.rightItem}>
+                    <CustomInput
+                      white
+                      inputRootCustomClasses={classes.inputRootCustomClasses}
+                      formControlProps={{
+                        className: classes.formControl,
+                      }}
+                      inputProps={{
+                        placeholder: "공장을 검색하세요",
+                        inputProps: {
+                          "aria-label": "Search",
+                          className: classes.searchInput,
+                        },
+                      }}
+                    />
+                    <Button justIcon color="white" size="sm">
+                      <Search className={classes.searchIcon} />
+                    </Button>
+                  </Box>
+                </ListItem>
+
+                <ListItem>
+                  <Typography variant="body1" style={{ fontWeight: "bold" }}>
+                    지역
+                  </Typography>
+                  <Box className={classes.rightItem}>
+                    <TextField
+                      fullWidth
+                      label="지역"
+                      name="state"
+                      onChange={handleChange}
+                      required
+                      select
+                      SelectProps={{ native: true }}
+                      value={values.state}
+                      variant="outlined"
+                    >
+                      {states.map((option) => (
+                        <option key={option.value} value={option.value}>
+                          {option.label}
+                        </option>
+                      ))}
+                    </TextField>
+                  </Box>
+                  <Box className={classes.rightItem}>
+                    <TextField
+                      fullWidth
+                      label="생산방식"
+                      name="state"
+                      onChange={handleChange}
+                      required
+                      select
+                      SelectProps={{ native: true }}
+                      value={values.state}
+                      variant="outlined"
+                    >
+                      {states.map((option) => (
+                        <option key={option.value} value={option.value}>
+                          {option.label}
+                        </option>
+                      ))}
+                    </TextField>
+                  </Box>
+                </ListItem>
+                <ListItem>
+                  <Typography variant="body1" style={{ fontWeight: "bold" }}>
+                    분야
+                  </Typography>
+                  <Box className={classes.rightItem}>
+                    <Typography variant="body1">봉제</Typography>
+                  </Box>
+                  <Box className={classes.rightItem}>
+                    <Typography variant="body1">원단/편직</Typography>
+                  </Box>
+                </ListItem>
+                <ListItem>
+                  <Typography variant="body1" style={{ fontWeight: "bold" }}>
+                    품목
+                  </Typography>
+                  <Box className={classes.rightItem}>
+                    <Typography variant="body1">티셔츠</Typography>
+                  </Box>
+                  <Box className={classes.rightItem}>
+                    <Typography variant="body1">셔츠</Typography>
+                  </Box>
+                  <Box className={classes.rightItem}>
+                    <Typography variant="body1">니트</Typography>
+                  </Box>
+                </ListItem>
+              </List>
             </GridItem>
             <GridItem xs={12} sm={12} md={6} />
+
             <GridItem xs={12} sm={12} md={6}>
               <GridContainer justify="flex-start">
                 <GridItem xs={6} sm={6} md={6}>
                   {" "}
-                  <TextField
-                    fullWidth
-                    label="지역"
-                    name="state"
-                    onChange={handleChange}
-                    required
-                    select
-                    SelectProps={{ native: true }}
-                    value={values.state}
-                    variant="outlined"
-                  >
-                    {states.map((option) => (
-                      <option key={option.value} value={option.value}>
-                        {option.label}
-                      </option>
-                    ))}
-                  </TextField>
                 </GridItem>
                 <GridItem xs={6} sm={6} md={6}>
                   {" "}
-                  <TextField
-                    fullWidth
-                    label="생산방식"
-                    name="state"
-                    onChange={handleChange}
-                    required
-                    select
-                    SelectProps={{ native: true }}
-                    value={values.state}
-                    variant="outlined"
-                  >
-                    {states.map((option) => (
-                      <option key={option.value} value={option.value}>
-                        {option.label}
-                      </option>
-                    ))}
-                  </TextField>
                 </GridItem>
               </GridContainer>
             </GridItem>
@@ -177,7 +259,7 @@ export default function SectionBasics() {
 
                   return filterData.map((post) => (
                     <GridItem xs={12} sm={12} md={6} key={post.id}>
-                      <CustomTabs headerColor="primary" post={post} />
+                      <FactoryCards headerColor="primary" post={post} />
                     </GridItem>
                   ));
                 }}

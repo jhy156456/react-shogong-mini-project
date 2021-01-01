@@ -26,7 +26,7 @@ export default function HeaderLinks(props) {
   return (
     <List className={classes.list}>
 
-      <ListItem className={classes.listItem}>
+      {/* <ListItem className={classes.listItem}>
         <CustomDropdown
           noLiPadding
           buttonText="더보기"
@@ -55,40 +55,35 @@ export default function HeaderLinks(props) {
             </a>
           ]}
         />
-      </ListItem>
+      </ListItem> */}
       <ListItem className={classes.listItem}>
-        <Tooltip
-          id="instagram-facebook"
-          title="쇼공 페이스북"
-          placement={window.innerWidth > 959 ? "top" : "left"}
-          classes={{ tooltip: classes.tooltip }}
-        >
-          <Button
+      <Button
             color="transparent"
-            href="https://www.facebook.com/shogongofficial"
+            href="https://www.instagram.com/shogong.official/"
             target="_blank"
             className={classes.navLink}
           >
-            <i className={classes.socialIcons + " fab fa-facebook"} />
+            <h6>쇼공 바로가기</h6>
+            {/* <i className={classes.socialIcons + " fab fa-instagram"} /> */}
           </Button>
-        </Tooltip>
       </ListItem>
       <ListItem className={classes.listItem}>
-        <Tooltip
+        {/* <Tooltip
           id="instagram-tooltip"
           title="쇼공 인스타그램"
           placement={window.innerWidth > 959 ? "top" : "left"}
           classes={{ tooltip: classes.tooltip }}
-        >
+        > */}
           <Button
             color="transparent"
             href="https://www.instagram.com/shogong.official/"
             target="_blank"
             className={classes.navLink}
           >
-            <i className={classes.socialIcons + " fab fa-instagram"} />
+            <h6>회원가입</h6>
+            {/* <i className={classes.socialIcons + " fab fa-instagram"} /> */}
           </Button>
-        </Tooltip>
+        {/* </Tooltip> */}
       </ListItem>
     </List>
   );

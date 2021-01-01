@@ -95,8 +95,11 @@ const useStyles = makeStyles((theme) => ({
   iconContainer:{
     marginLeft:theme.spacing(2),
     marginBottom:theme.spacing(1)
-    // padding: theme.spacing(1),
-  }
+    // padding: theme.spacing(1,),
+  },
+  cover: {
+    width: 151,
+  },
 }));
 
 export default function CustomTabs(props) {

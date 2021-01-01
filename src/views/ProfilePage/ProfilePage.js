@@ -60,31 +60,38 @@ export default function ProfilePage(props) {
   );
   const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
   console.log(data);
+  const myStyles = {
+    paperContainer: {
+        backgroundImage: `url(${work1})`,
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+    }
+};
   return (
     <React.Fragment>
       <Parallax small filter image={require("assets/img/profile-bg.jpg")} />
-      <div className={classNames(classes.main, classes.mainRaised)}>
+      <div className={classNames(classes.main, classes.mainRaised)} style={{paddingTop:"30px"}}>
         {loading ? (
           <CircularProgress />
         ) : (
           <div className={classes.container}>
-              <SectionCarousel />
-
-            <Box mt={2}/>
-            <GridContainer justify="center">
 
 
-              <GridItem xs={12} sm={12} md={6} >
-                <div className={classes.profile}>
+
+
+
+            <GridContainer style={myStyles.paperContainer}>
+
+
+                <div className={classes.profile} >
                   {/* <div>
                     <img src={work1} alt="..." className={imageClasses} />
                   </div> */}
 
-                  <div className={classes.name}>
-                    <Grid container justify="center" spacing={2}>
+                  <div className={classes.content}>
+                    <Grid container justify="flex-start" spacing={2}>
                       <Grid item>
                         <Typography
-                          align="center"
                           color="textPrimary"
                           variant="h5"
                         >
@@ -100,7 +107,6 @@ export default function ProfilePage(props) {
 
                     <Box mb={1}>
                       <Typography
-                        align="center"
                         color="textPrimary"
                         variant="body1"
                         style={{ wordBreak: "keep-all" }}
@@ -110,7 +116,7 @@ export default function ProfilePage(props) {
                     </Box>
 
                     <Box mb={3}>
-                      <Grid container justify="center" spacing={2}>
+                      <Grid container justify="flex-start" spacing={2}>
                         <Grid className={classes.statsItem} item>
                           <PhoneIcon
                             className={classes.verticalIcon}
@@ -152,12 +158,35 @@ export default function ProfilePage(props) {
                     >
                       연락처확인
                     </Button>
+
+                    <Box mb={1}/>
+                    <Typography
+                        color="textPrimary"
+                        variant="body1"
+                        style={{ wordBreak: "keep-all" }}
+                      >
+                        해당 제조사는 쇼공에서 자체상품을 판매하고 있는 제조사입니다.
+                      </Typography>
                   </div>
                 </div>
-              </GridItem>
             </GridContainer>
             <Box mb={3} />
             <Divider />
+
+
+            <GridContainer>
+              <GridItem xs={12} sm={12} md={12}>
+                <div className={classes.title}>
+                  <h4 className={classes.h3Style}>업체소개</h4>
+                </div>
+                <Typography variant="body2">산호는 직기 토탈 임가공 전문업체입니다.정장류를 포함한 다양한 직기아이템이
+가능하며 남방,블라우스,원피스,바지가 메인 아이템입니다.
+거래처가 원하는 납기싯점 관리를 중요하게 생각하며 검품을 통한 품질관리가 이루어지는 업체입니다</Typography>
+                <Typography variant="body2">직접생산</Typography>
+              </GridItem>
+            </GridContainer>
+            <Box mb={3} />
+            <Divider variant="fullWidth" />
 
             <GridContainer>
               <GridItem xs={12} sm={12} md={6}>
@@ -219,6 +248,7 @@ export default function ProfilePage(props) {
             <Divider variant="fullWidth" />
 
             {mQuery && !mQuery.matches ? (
+              <>
               <GridContainer>
                 <GridItem xs={12} sm={12} md={8} className={classes.navWrapper}>
                   <SinglineGridList
@@ -226,8 +256,11 @@ export default function ProfilePage(props) {
                   ></SinglineGridList>
                 </GridItem>
               </GridContainer>
+                  
+              </>
             ) : (
-              <SectionCarousel />
+              <><SectionCarousel /><SectionCarousel /></>
+              
             )}
             <Divider variant="fullWidth" />
             <div className={classes.title}>

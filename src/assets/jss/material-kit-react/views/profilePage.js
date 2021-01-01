@@ -5,7 +5,7 @@ import imagesStyle from "assets/jss/material-kit-react/imagesStyles.js";
 const profilePageStyle = {
   container,
   profile: {
-    textAlign: "center",
+    // textAlign: "center",
     // "& img": {
     //   maxWidth: "400px",
     //   height:'200px',
@@ -20,7 +20,9 @@ const profilePageStyle = {
     color: "#999",
     textAlign: "center !important"
   },
-  name: {
+  content: {
+    margin:"2rem",
+    
     // marginTop: "-80px"
   },
   ...imagesStyle,
@@ -61,7 +63,8 @@ const profilePageStyle = {
   h3Style:{
     fontSize : "1rem",
     fontWeight: "bold",
-  }
+  },
+  
 };
 
 export default profilePageStyle;
