@@ -48,7 +48,7 @@ const basicsStyle = {
     width: "260px"
   },
   rightItem:{
-    marginLeft : "30px"
+    marginLeft : "20px"
   },
   formControl: {
     margin: "0 !important",
@@ -61,6 +61,12 @@ const basicsStyle = {
     width: "20px",
     height: "20px",
     color: "inherit",
+  },
+  selectInput:{
+    "& .MuiOutlinedInput-input": {
+      padding : "10px 28px 10px 10px"
+
+    },
   },
   
   ...customCheckboxRadioSwitch

@@ -18,7 +18,6 @@ import {
 const useStyles = makeStyles(styles);
 
 export default function CustomInput(props) {
-  console.log("???")
   const classes = useStyles();
   const {
     formControlProps,
@@ -30,6 +29,7 @@ export default function CustomInput(props) {
     white,
     inputRootCustomClasses,
     success,
+    black,
   } = props;
   const hi = (e) => {
     setSearchInput(e.target.value);
@@ -45,14 +45,14 @@ export default function CustomInput(props) {
     [classes.underlineError]: error,
     [classes.underlineSuccess]: success && !error,
     [classes.underline]: true,
-    [classes.whiteUnderline]: white,
+    [classes.blackUnderline]: black,
   });
   const marginTop = classNames({
     [inputRootCustomClasses]: inputRootCustomClasses !== undefined,
   });
   const inputClasses = classNames({
     [classes.input]: true,
-    [classes.whiteInput]: white,
+    [classes.blackInput]: black,
   });
   var formControlClasses;
   if (formControlProps !== undefined) {

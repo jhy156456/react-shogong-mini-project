@@ -24,7 +24,6 @@ const useStyles = makeStyles((theme) => ({
     flex: "1 0 auto",
   },
   cover: {
-    width: 220,
     height: "100%",
   },
   controls: {
@@ -41,11 +40,11 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "0.7rem",
   },
 }));
-
 export default function MediaControlCard(props) {
+  const {post} = props;
   const classes = useStyles();
   const theme = useTheme();
-
+  console.log(post)
   return (
     <CardActionArea component="div">
       <Card className={classes.root}>
@@ -55,10 +54,10 @@ export default function MediaControlCard(props) {
         style={{ textDecoration: "none", color: "white" }}
       >
         <Grid container justify={"space-between"}>
-          <Grid item>
+          <Grid item xs={6}>
             <div className={classes.details}>
               <CardContent className={classes.content}>
-                <Typography variant="body1" style={{ fontWeight: "bold" }}>
+                <Typography variant="body1" style={{ fontWeight: "bold" ,color : 'black'}}>
                   제조사명
                 </Typography>
                 <Typography
@@ -114,7 +113,7 @@ export default function MediaControlCard(props) {
               </CardContent>
             </div>
           </Grid>
-          <Grid item>
+          <Grid item xs={6}>
             <CardMedia
               className={classes.cover}
               component="img"

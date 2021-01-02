@@ -28,21 +28,34 @@ import Button from "components/CustomButtons/Button.js";
 const useStyles = makeStyles((theme) => ({
   ...styles,
 }));
-const states = [
+const seoul = [
   {
-    value: "alabama",
-    label: "Alabama",
+    value: "서울특별시",
+    label: "서울특별시",
   },
   {
-    value: "new-york",
-    label: "New York",
+    value: "경기도",
+    label: "경기도",
   },
   {
-    value: "san-francisco",
-    label: "San Francisco",
+    value: "강원도",
+    label: "강원도",
   },
 ];
-
+const songpa = [
+  {
+    value: "송파구",
+    label: "송파구",
+  },
+  {
+    value: "강동구",
+    label: "강동구",
+  },
+  {
+    value: "강남구",
+    label: "강남구",
+  },
+];
 export default function SectionBasics() {
   const { loading, error, data, fetchMore } = useQuery(LIST_STORES_QUERY, {
     variables: {
@@ -54,7 +67,7 @@ export default function SectionBasics() {
 
   const classes = useStyles();
   const [checked, setChecked] = React.useState([24, 22]);
-  const [values, setValues] = useState({
+  const [seouls, setSeouls] = useState({
     firstName: "Katarina",
     lastName: "Smith",
     email: "demo@devias.io",
@@ -62,9 +75,23 @@ export default function SectionBasics() {
     state: "Alabama",
     country: "USA",
   });
-  const handleChange = (event) => {
-    setValues({
-      ...values,
+  const [songpas, setSongpas] = useState({
+    firstName: "Katarina",
+    lastName: "Smith",
+    email: "demo@devias.io",
+    phone: "",
+    state: "Alabama",
+    country: "USA",
+  });
+  const handleSeoulsChange = (event) => {
+    setSeouls({
+      ...seouls,
+      [event.target.name]: event.target.value,
+    });
+  };
+  const handleSongpasChange = (event) => {
+    setSongpas({
+      ...songpas,
       [event.target.name]: event.target.value,
     });
   };
@@ -111,22 +138,7 @@ export default function SectionBasics() {
       },
     });
   }, [data]);
-  function ccyFormat(num) {
-    return `${num.toFixed(2)}`;
-  }
 
-  function priceRow(qty, unit) {
-    return qty * unit;
-  }
-
-  function createRow(desc, qty, unit) {
-    const price = priceRow(qty, unit);
-    return { desc, qty, unit, price };
-  }
-
-  function subtotal(items) {
-    return items.map(({ price }) => price).reduce((sum, i) => sum + i, 0);
-  }
   return (
     <div className={classes.sections}>
       <div className={classes.container}>
@@ -170,16 +182,16 @@ export default function SectionBasics() {
                   <Box className={classes.rightItem}>
                     <TextField
                       fullWidth
-                      label="지역"
+                      className={classes.selectInput}
+                      label="시"
                       name="state"
-                      onChange={handleChange}
-                      required
+                      onChange={handleSeoulsChange}
                       select
                       SelectProps={{ native: true }}
-                      value={values.state}
+                      value={seoul.state}
                       variant="outlined"
                     >
-                      {states.map((option) => (
+                      {seoul.map((option) => (
                         <option key={option.value} value={option.value}>
                           {option.label}
                         </option>
@@ -189,16 +201,16 @@ export default function SectionBasics() {
                   <Box className={classes.rightItem}>
                     <TextField
                       fullWidth
-                      label="생산방식"
+                      className={classes.selectInput}
+                      label="구"
                       name="state"
-                      onChange={handleChange}
-                      required
+                      onChange={handleSongpasChange}
                       select
                       SelectProps={{ native: true }}
-                      value={values.state}
+                      value={songpa.state}
                       variant="outlined"
                     >
-                      {states.map((option) => (
+                      {songpa.map((option) => (
                         <option key={option.value} value={option.value}>
                           {option.label}
                         </option>
@@ -245,6 +257,7 @@ export default function SectionBasics() {
                 </GridItem>
               </GridContainer>
             </GridItem>
+     
             <GridItem xs={12} sm={12} md={6} />
             {loading ? (
               <CircularProgress />

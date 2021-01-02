@@ -14,7 +14,6 @@ import {
   SearchInputConsumer,
 } from "contexts/search.js";
 var hist = createBrowserHistory();
-
 function App() {
   return (
     <div>

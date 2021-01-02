@@ -64,7 +64,7 @@ export default function ProfilePage(props) {
     paperContainer: {
         backgroundImage: `url(${work1})`,
         backgroundRepeat: "no-repeat",
-        backgroundSize: "cover",
+        backgroundSize: "100% 100%",
     }
 };
   return (
@@ -76,13 +76,7 @@ export default function ProfilePage(props) {
         ) : (
           <div className={classes.container}>
 
-
-
-
-
             <GridContainer style={myStyles.paperContainer}>
-
-
                 <div className={classes.profile} >
                   {/* <div>
                     <img src={work1} alt="..." className={imageClasses} />
@@ -250,16 +244,31 @@ export default function ProfilePage(props) {
             {mQuery && !mQuery.matches ? (
               <>
               <GridContainer>
-                <GridItem xs={12} sm={12} md={8} className={classes.navWrapper}>
+                <GridItem xs={12} sm={12} md={12} className={classes.navWrapper}>
                   <SinglineGridList
                     itemClass={navImageClasses}
                   ></SinglineGridList>
                 </GridItem>
               </GridContainer>
-                  
+              <GridContainer>
+                <GridItem xs={12} sm={12} md={12} className={classes.navWrapper}>
+                  <SinglineGridList
+                    itemClass={navImageClasses}
+                  ></SinglineGridList>
+                </GridItem>
+              </GridContainer>
               </>
             ) : (
-              <><SectionCarousel /><SectionCarousel /></>
+              <>
+                 <div className={classes.title}>
+                  <h4 className={classes.h3Style}>제조공장 사진</h4>
+                </div>
+              <SectionCarousel />
+              
+              <div className={classes.title}>
+                  <h4 className={classes.h3Style}>샘플사진</h4>
+                </div>
+              <SectionCarousel /></>
               
             )}
             <Divider variant="fullWidth" />

@@ -312,8 +312,9 @@ const buttonStyle = {
       }
     },
     "&$sm": {
-      height: "30px",
+      height: "28px", // edit JHY : height: "30px",
       minWidth: "30px",
+      marginLeft:"10px",
       width: "30px",
       "& .fab,& .fas,& .far,& .fal,& .material-icons": {
         fontSize: "17px",

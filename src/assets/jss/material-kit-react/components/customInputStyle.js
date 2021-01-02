@@ -38,6 +38,14 @@ const customInputStyle = {
       borderColor: "#FFFFFF"
     }
   },
+  blackUnderline:{
+    "&:hover:not($disabled):before,&:before": {
+      borderColor: "#000000"
+    },
+    "&:after": {
+      borderColor: "#000000"
+    }
+  },
   labelRoot: {
     ...defaultFont,
     color: "#AAAAAA !important",
@@ -83,7 +91,13 @@ const customInputStyle = {
       color: "#FFFFFF",
       opacity: "1"
     }
-  }
+  },
+  blackInput: {
+    "&,&::placeholder": {
+      color: "black",
+      opacity: "1"
+    }
+  },
 };
 
 export default customInputStyle;

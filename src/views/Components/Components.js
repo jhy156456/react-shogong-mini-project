@@ -24,8 +24,8 @@ export default function Components(props) {
 
   const { loading, error, data, fetchMore } = useQuery(LOGIN_QUERY, {
     variables: {
-      username: "shogong",
-      password: "tyrhddmltnghwk",
+      username: process.env.REACT_APP_ID,
+      password: process.env.REACT_APP_PW,
     },
   });
 

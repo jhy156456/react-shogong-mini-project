@@ -8,13 +8,13 @@ import {
   InMemoryCache,
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
-//import { Provider } from "react-redux";
+import dotenv from 'dotenv'
 import App from "./App";
-
+dotenv.config();
 const httpLink = createHttpLink({
-  uri: "http://13.124.188.131:8000/graphql",
+  uri: process.env.REACT_APP_API_URL,
 });
-
+console.log("Asdf : " + process.env.REACT_APP_API_URL)
 const authLink = setContext((_, { headers }) => {
   // get the authentication token from local storage if it exists
   const token = localStorage.getItem("token");
