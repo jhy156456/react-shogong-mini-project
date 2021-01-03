@@ -21,7 +21,7 @@ const profilePageStyle = {
     textAlign: "center !important"
   },
   content: {
-    margin:"2rem",
+    padding : "3rem",
     
     // marginTop: "-80px"
   },

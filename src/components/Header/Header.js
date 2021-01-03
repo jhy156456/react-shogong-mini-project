@@ -117,7 +117,7 @@ export default function Header(props) {
 
   const imageRef = useRef(null);
   const brandComponent = (
-    <img src={LogoWhite} alt="http://localhost:3000/" className={imageClasses} ref={imageRef} />
+    <a href="http://localhost:3000/"><img src={LogoWhite} className={imageClasses} ref={imageRef} /></a>
   );
 
   //  <Button className={classes.title}></Button>;

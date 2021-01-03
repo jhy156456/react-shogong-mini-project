@@ -1,7 +1,8 @@
 import { container, title,defaultFont } from "assets/jss/material-kit-react.js";
 import customCheckboxRadioSwitch from "assets/jss/material-kit-react/customCheckboxRadioSwitch.js";
-
+import profilePageStyles from "assets/jss/material-kit-react/views/profilePage.js";
 const basicsStyle = {
+  ...profilePageStyles,
   sections: {
     padding: "30px 0"
   },

@@ -62,42 +62,38 @@ export default function ProfilePage(props) {
   console.log(data);
   const myStyles = {
     paperContainer: {
-        backgroundImage: `url(${work1})`,
-        backgroundRepeat: "no-repeat",
-        backgroundSize: "100% 100%",
-    }
-};
+      backgroundImage: `url(${work1})`,
+      backgroundRepeat: "no-repeat",
+      backgroundSize: "100% 100%",
+    },
+  };
   return (
     <React.Fragment>
       <Parallax small filter image={require("assets/img/profile-bg.jpg")} />
-      <div className={classNames(classes.main, classes.mainRaised)} style={{paddingTop:"30px"}}>
+      <div
+        className={classNames(classes.main, classes.mainRaised)}
+        style={{ paddingTop: "30px" }}
+      >
         {loading ? (
           <CircularProgress />
         ) : (
           <div className={classes.container}>
-
-            <GridContainer style={myStyles.paperContainer}>
-                <div className={classes.profile} >
-                  {/* <div>
+            <GridContainer>
+              <GridItem>
+                {/* <div>
                     <img src={work1} alt="..." className={imageClasses} />
                   </div> */}
-
+                <div style={myStyles.paperContainer}>
                   <div className={classes.content}>
-                    <Grid container justify="flex-start" spacing={2}>
-                      <Grid item>
-                        <Typography
-                          color="textPrimary"
-                          variant="h5"
-                        >
+                    <GridContainer justify="flex-start" spacing={2}>
+                      <GridItem>
+                        <Typography color="textPrimary" variant="h4">
                           <Box fontWeight="fontWeightBold" mb={1}>
                             {data.userInfo.business.license_name}
                           </Box>
                         </Typography>
-                      </Grid>
-                      <Grid item>
-                        <FavoriteBorderIcon />
-                      </Grid>
-                    </Grid>
+                      </GridItem>
+                    </GridContainer>
 
                     <Box mb={1}>
                       <Typography
@@ -110,8 +106,8 @@ export default function ProfilePage(props) {
                     </Box>
 
                     <Box mb={3}>
-                      <Grid container justify="flex-start" spacing={2}>
-                        <Grid className={classes.statsItem} item>
+                      <GridContainer justify="flex-start" spacing={2}>
+                        <GridItem className={classes.statsItem}>
                           <PhoneIcon
                             className={classes.verticalIcon}
                             color="action"
@@ -125,8 +121,8 @@ export default function ProfilePage(props) {
                           >
                             연락처 조회수 1
                           </Typography>
-                        </Grid>
-                        <Grid className={classes.statsItem} item>
+                        </GridItem>
+                        <GridItem className={classes.statsItem}>
                           <ChatBubbleOutlineIcon
                             className={classes.verticalIcon}
                             color="action"
@@ -140,8 +136,8 @@ export default function ProfilePage(props) {
                           >
                             거래후기 3
                           </Typography>
-                        </Grid>
-                      </Grid>
+                        </GridItem>
+                      </GridContainer>
                     </Box>
 
                     <Button
@@ -153,29 +149,33 @@ export default function ProfilePage(props) {
                       연락처확인
                     </Button>
 
-                    <Box mb={1}/>
+                    <Box mb={1} />
                     <Typography
-                        color="textPrimary"
-                        variant="body1"
-                        style={{ wordBreak: "keep-all" }}
-                      >
-                        해당 제조사는 쇼공에서 자체상품을 판매하고 있는 제조사입니다.
-                      </Typography>
+                      color="textPrimary"
+                      variant="body1"
+                      style={{ wordBreak: "keep-all" }}
+                    >
+                      해당 제조사는 쇼공에서 자체상품을 판매하고 있는
+                      제조사입니다.
+                    </Typography>
                   </div>
                 </div>
+              </GridItem>
             </GridContainer>
             <Box mb={3} />
             <Divider />
-
 
             <GridContainer>
               <GridItem xs={12} sm={12} md={12}>
                 <div className={classes.title}>
                   <h4 className={classes.h3Style}>업체소개</h4>
                 </div>
-                <Typography variant="body2">산호는 직기 토탈 임가공 전문업체입니다.정장류를 포함한 다양한 직기아이템이
-가능하며 남방,블라우스,원피스,바지가 메인 아이템입니다.
-거래처가 원하는 납기싯점 관리를 중요하게 생각하며 검품을 통한 품질관리가 이루어지는 업체입니다</Typography>
+                <Typography variant="body2">
+                  산호는 직기 토탈 임가공 전문업체입니다.정장류를 포함한 다양한
+                  직기아이템이 가능하며 남방,블라우스,원피스,바지가 메인
+                  아이템입니다. 거래처가 원하는 납기싯점 관리를 중요하게
+                  생각하며 검품을 통한 품질관리가 이루어지는 업체입니다
+                </Typography>
                 <Typography variant="body2">직접생산</Typography>
               </GridItem>
             </GridContainer>
@@ -243,33 +243,43 @@ export default function ProfilePage(props) {
 
             {mQuery && !mQuery.matches ? (
               <>
-              <GridContainer>
-                <GridItem xs={12} sm={12} md={12} className={classes.navWrapper}>
-                  <SinglineGridList
-                    itemClass={navImageClasses}
-                  ></SinglineGridList>
-                </GridItem>
-              </GridContainer>
-              <GridContainer>
-                <GridItem xs={12} sm={12} md={12} className={classes.navWrapper}>
-                  <SinglineGridList
-                    itemClass={navImageClasses}
-                  ></SinglineGridList>
-                </GridItem>
-              </GridContainer>
+                <GridContainer>
+                  <GridItem
+                    xs={12}
+                    sm={12}
+                    md={12}
+                    className={classes.navWrapper}
+                  >
+                    <SinglineGridList
+                      itemClass={navImageClasses}
+                    ></SinglineGridList>
+                  </GridItem>
+                </GridContainer>
+                <GridContainer>
+                  <GridItem
+                    xs={12}
+                    sm={12}
+                    md={12}
+                    className={classes.navWrapper}
+                  >
+                    <SinglineGridList
+                      itemClass={navImageClasses}
+                    ></SinglineGridList>
+                  </GridItem>
+                </GridContainer>
               </>
             ) : (
               <>
-                 <div className={classes.title}>
+                <div className={classes.title}>
                   <h4 className={classes.h3Style}>제조공장 사진</h4>
                 </div>
-              <SectionCarousel />
-              
-              <div className={classes.title}>
+                <SectionCarousel />
+
+                <div className={classes.title}>
                   <h4 className={classes.h3Style}>샘플사진</h4>
                 </div>
-              <SectionCarousel /></>
-              
+                <SectionCarousel />
+              </>
             )}
             <Divider variant="fullWidth" />
             <div className={classes.title}>

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback, useContext } from "react";
 //@material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import { TextField, Typography, Box } from "@material-ui/core";
+import { TextField, Typography, Box,Chip } from "@material-ui/core";
 //core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
@@ -24,9 +24,13 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Search from "@material-ui/icons/Search";
 import CustomInput from "components/CustomInput/CustomInput.js";
 import Button from "components/CustomButtons/Button.js";
+import DoneIcon from '@material-ui/icons/Done';
 
 const useStyles = makeStyles((theme) => ({
   ...styles,
+  gutters:{
+    paddingRight:'16px',
+  }
 }));
 const seoul = [
   {
@@ -138,6 +142,13 @@ export default function SectionBasics() {
       },
     });
   }, [data]);
+  const handleDelete = () => {
+    console.info('You clicked the delete icon.');
+  };
+
+  const handleClick = () => {
+    console.info('You clicked the Chip.');
+  };
 
   return (
     <div className={classes.sections}>
@@ -146,119 +157,115 @@ export default function SectionBasics() {
           <h2>Basic Elements</h2>
         </div> */}
         <div id="buttons">
+          <List>
+            <ListItem disableGutters={true}>
+              <Typography variant="body1" style={{ fontWeight: "bold" }}>
+                주소
+              </Typography>
+
+              <Box className={classes.rightItem}>
+                <CustomInput
+                  white
+                  inputRootCustomClasses={classes.inputRootCustomClasses}
+                  formControlProps={{
+                    className: classes.formControl,
+                  }}
+                  inputProps={{
+                    placeholder: "공장을 검색하세요",
+                    inputProps: {
+                      "aria-label": "Search",
+                      className: classes.searchInput,
+                    },
+                  }}
+                />
+                <Button justIcon color="white" size="sm">
+                  <Search className={classes.searchIcon} />
+                </Button>
+              </Box>
+            </ListItem>
+
+            <ListItem disableGutters={true}>
+              <Typography variant="body1" style={{ fontWeight: "bold" }}>
+                지역
+              </Typography>
+              <Box className={classes.rightItem}>
+                <TextField
+                  fullWidth
+                  className={classes.selectInput}
+                  label="시"
+                  name="state"
+                  onChange={handleSeoulsChange}
+                  select
+                  SelectProps={{ native: true }}
+                  value={seoul.state}
+                  variant="outlined"
+                >
+                  {seoul.map((option) => (
+                    <option key={option.value} value={option.value}>
+                      {option.label}
+                    </option>
+                  ))}
+                </TextField>
+              </Box>
+              <Box className={classes.rightItem}>
+                <TextField
+                  fullWidth
+                  className={classes.selectInput}
+                  label="구"
+                  name="state"
+                  onChange={handleSongpasChange}
+                  select
+                  SelectProps={{ native: true }}
+                  value={songpa.state}
+                  variant="outlined"
+                >
+                  {songpa.map((option) => (
+                    <option key={option.value} value={option.value}>
+                      {option.label}
+                    </option>
+                  ))}
+                </TextField>
+              </Box>
+            </ListItem>
+            <ListItem disableGutters={true}>
+              <Typography variant="body1" style={{ fontWeight: "bold" }}>
+                분야
+              </Typography>
+              <Box className={classes.rightItem}>
+                {/* <Typography variant="body1">봉제</Typography> */}
+                <Chip
+    label="봉제"
+    clickable
+    color="primary"
+    onDelete={handleDelete}
+    deleteIcon={<DoneIcon />}
+      />
+              </Box>
+              <Box className={classes.rightItem}>
+                <Typography variant="body1">원단/편직</Typography>
+              </Box>
+            </ListItem>
+            <ListItem disableGutters={true}>
+              <Typography variant="body1" style={{ fontWeight: "bold" }}>
+                품목
+              </Typography>
+              <Box className={classes.rightItem}>
+                <Typography variant="body1">티셔츠</Typography>
+              </Box>
+              <Box className={classes.rightItem}>
+                <Typography variant="body1">셔츠</Typography>
+              </Box>
+              <Box className={classes.rightItem}>
+                <Typography variant="body1">니트</Typography>
+              </Box>
+            </ListItem>
+          </List>
+
+          <Box mt={3}/>
+          <Typography variant="body1" style={{ fontWeight: "bold" }}>
+                이미지 컨텐츠 제조 공장
+              </Typography>
           <GridContainer justify="space-around" spacing={0}>
-            <GridItem xs={12} sm={12} md={6}>
-              <List>
-                <ListItem>
-                  <Typography variant="body1" style={{ fontWeight: "bold" }}>
-                    주소
-                  </Typography>
-
-                  <Box className={classes.rightItem}>
-                    <CustomInput
-                      white
-                      inputRootCustomClasses={classes.inputRootCustomClasses}
-                      formControlProps={{
-                        className: classes.formControl,
-                      }}
-                      inputProps={{
-                        placeholder: "공장을 검색하세요",
-                        inputProps: {
-                          "aria-label": "Search",
-                          className: classes.searchInput,
-                        },
-                      }}
-                    />
-                    <Button justIcon color="white" size="sm">
-                      <Search className={classes.searchIcon} />
-                    </Button>
-                  </Box>
-                </ListItem>
-
-                <ListItem>
-                  <Typography variant="body1" style={{ fontWeight: "bold" }}>
-                    지역
-                  </Typography>
-                  <Box className={classes.rightItem}>
-                    <TextField
-                      fullWidth
-                      className={classes.selectInput}
-                      label="시"
-                      name="state"
-                      onChange={handleSeoulsChange}
-                      select
-                      SelectProps={{ native: true }}
-                      value={seoul.state}
-                      variant="outlined"
-                    >
-                      {seoul.map((option) => (
-                        <option key={option.value} value={option.value}>
-                          {option.label}
-                        </option>
-                      ))}
-                    </TextField>
-                  </Box>
-                  <Box className={classes.rightItem}>
-                    <TextField
-                      fullWidth
-                      className={classes.selectInput}
-                      label="구"
-                      name="state"
-                      onChange={handleSongpasChange}
-                      select
-                      SelectProps={{ native: true }}
-                      value={songpa.state}
-                      variant="outlined"
-                    >
-                      {songpa.map((option) => (
-                        <option key={option.value} value={option.value}>
-                          {option.label}
-                        </option>
-                      ))}
-                    </TextField>
-                  </Box>
-                </ListItem>
-                <ListItem>
-                  <Typography variant="body1" style={{ fontWeight: "bold" }}>
-                    분야
-                  </Typography>
-                  <Box className={classes.rightItem}>
-                    <Typography variant="body1">봉제</Typography>
-                  </Box>
-                  <Box className={classes.rightItem}>
-                    <Typography variant="body1">원단/편직</Typography>
-                  </Box>
-                </ListItem>
-                <ListItem>
-                  <Typography variant="body1" style={{ fontWeight: "bold" }}>
-                    품목
-                  </Typography>
-                  <Box className={classes.rightItem}>
-                    <Typography variant="body1">티셔츠</Typography>
-                  </Box>
-                  <Box className={classes.rightItem}>
-                    <Typography variant="body1">셔츠</Typography>
-                  </Box>
-                  <Box className={classes.rightItem}>
-                    <Typography variant="body1">니트</Typography>
-                  </Box>
-                </ListItem>
-              </List>
-            </GridItem>
-            <GridItem xs={12} sm={12} md={6} />
-
-            <GridItem xs={12} sm={12} md={6}>
-              <GridContainer justify="flex-start">
-                <GridItem xs={6} sm={6} md={6}>
-                  {" "}
-                </GridItem>
-                <GridItem xs={6} sm={6} md={6}>
-                  {" "}
-                </GridItem>
-              </GridContainer>
-            </GridItem>
-     
-            <GridItem xs={12} sm={12} md={6} />
             {loading ? (
               <CircularProgress />
             ) : (
