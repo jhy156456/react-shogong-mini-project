@@ -11,7 +11,7 @@ import { makeStyles } from "@material-ui/core/styles";
 // core components
 import Parallax from "components/Parallax/Parallax.js";
 // sections for this page
-import SectionBasics from "./Sections/SectionBasics.js";
+import MainPage from "./Sections/MainPage.js";
 
 import styles from "assets/jss/material-kit-react/views/components.js";
 
@@ -22,19 +22,19 @@ export default function Components(props) {
   const { ...rest } = props;
 
 
-  const { loading, error, data, fetchMore } = useQuery(LOGIN_QUERY, {
-    variables: {
-      username: process.env.REACT_APP_ID,
-      password: process.env.REACT_APP_PW,
-    },
-  });
+  // const { loading, error, data, fetchMore } = useQuery(LOGIN_QUERY, {
+  //   variables: {
+  //     username: process.env.REACT_APP_ID,
+  //     password: process.env.REACT_APP_PW,
+  //   },
+  // });
 
   return (
     <React.Fragment>
-      <Parallax small filter image={require("assets/img/bg5.png")}></Parallax>
+      <Parallax small filter image={require("assets/img/bg5.png")} className={classes.sameContainer}></Parallax>
 
       <div className={classNames(classes.main, classes.mainRaised)}>
-        {loading ? (
+        {/* {loading ? (
           <p>불러오는중..</p>
         ) : (
           <div>
@@ -43,10 +43,11 @@ export default function Components(props) {
                 "access_token",
                 data.userCheck.access_token
               );
-              return <SectionBasics />;
+              return ;
             })()}
           </div>
-        )}
+        )} */}
+        <MainPage />
       </div>
     </React.Fragment>
   );

@@ -38,13 +38,15 @@ const useStyles = makeStyles((theme) => ({
   },
   h6Style: {
     fontSize: "0.7rem",
+    textOverflow: "ellipsis",
+    overflow: "hidden",
+    whiteSpace: "nowrap",
   },
 }));
 export default function MediaControlCard(props) {
   const {post} = props;
   const classes = useStyles();
   const theme = useTheme();
-  console.log(post)
   return (
     <CardActionArea component="div">
       <Card className={classes.root}>
@@ -54,9 +56,9 @@ export default function MediaControlCard(props) {
         style={{ textDecoration: "none", color: "white" }}
       >
         <Grid container justify={"space-between"}>
-          <Grid item xs={6}>
+          <Grid item xs={6} >
             <div className={classes.details}>
-              <CardContent className={classes.content}>
+              <CardContent className={classes.content} style={{paddingBottom:"16px"}}>
                 <Typography variant="body1" style={{ fontWeight: "bold" ,color : 'black'}}>
                   제조사명
                 </Typography>

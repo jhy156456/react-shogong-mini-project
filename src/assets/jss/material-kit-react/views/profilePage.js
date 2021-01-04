@@ -1,8 +1,9 @@
-import { container, title } from "assets/jss/material-kit-react.js";
+import { container, title,sameContainer } from "assets/jss/material-kit-react.js";
 
 import imagesStyle from "assets/jss/material-kit-react/imagesStyles.js";
 
 const profilePageStyle = {
+  sameContainer,
   container,
   profile: {
     // textAlign: "center",
@@ -32,7 +33,8 @@ const profilePageStyle = {
     zIndex: "3"
   },
   mainRaised: {
-    margin: "-60px 15px 0px",
+    // margin: "-15px 0px", edit JHY
+    margin: "0",
     borderRadius: "6px",
     boxShadow:
       "0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2)"
