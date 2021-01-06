@@ -1,15 +1,30 @@
 import React, { useState, useEffect, useCallback, useContext } from "react";
 //@material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
-import CircularProgress from "@material-ui/core/CircularProgress";
-import { TextField, Typography, Box, Chip, Grid } from "@material-ui/core";
-//core components
+import {
+  TextField,
+  Typography,
+  Box,
+  Chip,
+  Grid,
+  List,
+  ListItem,
+  CircularProgress,
+} from "@material-ui/core";
+//@material-ui/icons components
+import { Search, DoneIcon } from "@material-ui/icons";
+//custom components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import FactoryCards from "components/FactoryCards/FactoryCard.js";
 import CustomTabs from "components/CustomTabs/CustomTabs.js";
+import ChipListItem from "./ChipListItem";
+import CustomInput from "components/CustomInput/CustomInput.js";
+import Button from "components/CustomButtons/Button.js";
+import CustomDropdown from "components/CustomDropdown/CustomDropdown.js";
 //styles
-import styles from "assets/jss/material-kit-react/views/componentsSections/basicsStyle.js";
+import styles from "assets/jss/material-kit-react/views/componentsSections/mainPageStyle.js";
+import headerLinksStyle from "assets/jss/material-kit-react/components/headerLinksStyle.js";
 //gql
 import { useQuery, useLazyQuery } from "@apollo/client";
 import { LIST_STORES_QUERY } from "lib/api/posts.js";
@@ -18,16 +33,11 @@ import {
   SearchInputContextProvider,
   SearchInputConsumer,
 } from "contexts/search.js";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
-import Search from "@material-ui/icons/Search";
-import CustomInput from "components/CustomInput/CustomInput.js";
-import Button from "components/CustomButtons/Button.js";
-import DoneIcon from "@material-ui/icons/Done";
-import ChipListItem from "./ChipListItem";
+import { Link } from "react-router-dom";
+
 const useStyles = makeStyles((theme) => ({
   ...styles,
+  ...headerLinksStyle,
   gutters: {
     paddingRight: "16px",
   },
@@ -69,6 +79,11 @@ export default function MainPage() {
   //   },
   // });
 
+  const onSearchButtonClick = (e, value) => {
+    console.log(e);
+    e.preventDefault();
+    console.log(value.state.input);
+  };
   const classes = useStyles();
   const [checked, setChecked] = React.useState([24, 22]);
   const [seouls, setSeouls] = useState({
@@ -228,32 +243,69 @@ export default function MainPage() {
               <Typography variant="body1" style={{ fontWeight: "bold" }}>
                 주소
               </Typography>
-
-              <Box className={classes.rightItem}>
-                <CustomInput
-                  white
-                  inputRootCustomClasses={classes.inputRootCustomClasses}
-                  formControlProps={{
-                    className: classes.formControl,
-                  }}
-                  inputProps={{
-                    placeholder: "공장을 검색하세요",
-                    inputProps: {
-                      "aria-label": "Search",
-                      className: classes.searchInput,
-                    },
-                  }}
-                />
-                <Button justIcon color="white" size="sm">
-                  <Search className={classes.searchIcon} />
-                </Button>
-              </Box>
+              <SearchInputConsumer>
+                {(value) => {
+                  return (
+                    <form
+                      className={classes.rightItem}
+                      onSubmit={(e) => onSearchButtonClick(e, value)}
+                      style={{ marginBottom: "0" }}
+                    >
+                      <CustomInput
+                        white
+                        inputRootCustomClasses={classes.inputRootCustomClasses}
+                        formControlProps={{
+                          className: classes.formControl,
+                        }}
+                        inputProps={{
+                          placeholder: "공장을 검색하세요",
+                          inputProps: {
+                            "aria-label": "Search",
+                            className: classes.searchInput,
+                          },
+                        }}
+                      />
+                      <Button
+                        justIcon
+                        color="white"
+                        size="sm"
+                        onClick={(e) => onSearchButtonClick(e, value)}
+                      >
+                        <Search className={classes.searchIcon} />
+                      </Button>
+                    </form>
+                  );
+                }}
+              </SearchInputConsumer>
             </ListItem>
 
             <ListItem disableGutters={true}>
-              <Typography variant="body1" style={{ fontWeight: "bold",whiteSpace:"nowrap" }}>
+              <Typography
+                variant="body1"
+                style={{ fontWeight: "bold", whiteSpace: "nowrap" }}
+              >
                 지역
               </Typography>
+              <CustomDropdown
+                noLiPadding
+                buttonText="asdf"
+                buttonProps={{
+                  className: classes.navLink,
+                  color: "transparent",
+                }}
+                dropdownList={[
+                  <Link to="/" className={classes.dropdownLink}>
+                    All components
+                  </Link>,
+                  <a
+                    href="https://creativetimofficial.github.io/material-kit-react/#/documentation?ref=mkr-navbar"
+                    target="_blank"
+                    className={classes.dropdownLink}
+                  >
+                    Documentation
+                  </a>,
+                ]}
+              />
               <Box className={classes.rightItem}>
                 <TextField
                   fullWidth
@@ -294,13 +346,20 @@ export default function MainPage() {
               </Box>
             </ListItem>
             <ListItem disableGutters={true}>
-              <Typography variant="body1" style={{ fontWeight: "bold",whiteSpace:"nowrap" }}>
+              <Typography
+                variant="body1"
+                style={{
+                  fontWeight: "bold",
+                  whiteSpace: "nowrap",
+                  marginBottom: "10px",
+                }}
+              >
                 분야
               </Typography>
 
               <Grid container justify={"flex-start"}>
                 {classificationChips.map((chip, index) => (
-                  <Grid item>
+                  <Grid item style={{ marginBottom: "10px" }}>
                     <ChipListItem
                       chip={chip}
                       index={index}
@@ -312,12 +371,19 @@ export default function MainPage() {
               </Grid>
             </ListItem>
             <ListItem disableGutters={true}>
-              <Typography variant="body1" style={{ fontWeight: "bold" ,whiteSpace:"nowrap"}}>
+              <Typography
+                variant="body1"
+                style={{
+                  fontWeight: "bold",
+                  whiteSpace: "nowrap",
+                  marginBottom: "10px",
+                }}
+              >
                 품목
               </Typography>
-              <Grid container justify={"flex-start"}>
+              <Grid container>
                 {itemChips.map((chip, index) => (
-                  <Grid item>
+                  <Grid item style={{ marginBottom: "10px" }}>
                     <ChipListItem
                       chip={chip}
                       index={index}
@@ -341,22 +407,11 @@ export default function MainPage() {
       
             )} */}
 
-            <SearchInputConsumer>
-              {(value) => {
-                const filterData = data.adminUser.result.filter((c) => {
-                  return (
-                    c.business.license_name.indexOf(value.state.input) > -1
-                  );
-                });
-
-                return filterData.map((post) => (
-                  <GridItem xs={12} sm={12} md={6} key={post.id}>
-                    <FactoryCards headerColor="primary" post={post} />
-                  </GridItem>
-                ));
-              }}
-            </SearchInputConsumer>
-
+            {data.adminUser.result.map((post) => (
+              <GridItem xs={12} sm={12} md={6} key={post.id}>
+                <FactoryCards headerColor="primary" post={post} />
+              </GridItem>
+            ))}
             {/* <GridItem xs={12} sm={12} md={6}>
               <CustomTabs headerColor="primary" />
             </GridItem>

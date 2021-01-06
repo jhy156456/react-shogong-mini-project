@@ -3,30 +3,35 @@ import React, { useEffect, useState } from "react";
 import classNames from "classnames";
 //@material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
-import { Box, Divider, Grid, Typography } from "@material-ui/core";
-import CircularProgress from "@material-ui/core/CircularProgress";
+import {
+  Box,
+  Divider,
+  Grid,
+  Typography,
+  CircularProgress,
+} from "@material-ui/core";
+import muiButton from "@material-ui/core/Button";
 //@material-ui/icons
-import ChatBubbleOutlineIcon from "@material-ui/icons/ChatBubbleOutline";
-import PhoneIcon from "@material-ui/icons/Phone";
-import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
-//core components
+import {
+  ChatBubbleOutlineIcon,
+  PhoneIcon,
+  FavoriteBorderIcon,
+} from "@material-ui/icons";
+//custom components
 import SectionCarousel from "components/Sections/SectionCarousel.js";
 import Button from "components/CustomButtons/Button.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import Parallax from "components/Parallax/Parallax.js";
+import SinglineGridList from "./SingleLineGridList";
+import Comments from "components/comment/Comments";
 //style
-import styles from "assets/jss/material-kit-react/views/profilePage.js";
+import styles from "assets/jss/material-kit-react/views/factoryDetailPage.js";
 //graphql
 import { USER_INFO_QUERY } from "lib/api/user.js";
 import { useParams } from "react-router-dom";
 import { Query } from "react-apollo";
 import { useQuery } from "@apollo/client";
-import "./hi.css";
-
-import work1 from "assets/img/examples/olu-eletu.jpg";
-import SinglineGridList from "./SingleLineGridList";
-import Comments from "components/comment/Comments";
 
 const useStyles = makeStyles((theme) => ({
   ...styles,
@@ -38,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
       fontSize: "1rem",
     },
     "@media (min-width: 768px)": {
-      fontSize: "1.25rem",
+      fontSize: "1.5rem",
     },
   },
   headerDetailStyle: {
@@ -49,13 +54,13 @@ const useStyles = makeStyles((theme) => ({
       fontSize: "1rem",
     },
   },
-  borderStyle:{
+  borderStyle: {
     "@media (max-width: 767px)": {
-      height:"5px",
+      height: "5px",
     },
-    marginLeft:"-15px",
-    marginRight:"-15px",
-  }
+    marginLeft: "-15px",
+    marginRight: "-15px",
+  },
 }));
 
 export default function FactoryDetailPage(props) {
@@ -68,7 +73,6 @@ export default function FactoryDetailPage(props) {
     // this is the cleanup function to remove the listener
     return () => mediaQuery.removeListener(setMQuery);
   }, []);
-  // MediaQueryListEvent { isTrusted: true, media: "(min-width: 768px)", matches: true ...}
 
   const classes = useStyles();
   const { id } = useParams();
@@ -91,20 +95,13 @@ export default function FactoryDetailPage(props) {
     '{"userInfo":{"__typename":"User","username":"overcam","manager":"박윤범","position":"대표","contact":"010-7112-6340","email":"yb@shogong.com","deliver":null,"business":{"__typename":"BusinessInfo","representative":"박윤범","license_name":"쇼공","license_number":"350-88-01464","tax_email":"yb@shogong.com","started":"2019-06-01","description":"공장 직거래 플랫폼을 서비스하고 있습니다.","profile_link":"","license_link":"https://shogong-management.s3.ap-northeast-2.amazonaws.com/overcam/사업자 등록증.pdf","account_link":"https://shogong-management.s3.ap-northeast-2.amazonaws.com/overcam/통장 사본.pdf","client":{"__typename":"Client","client_1":"쇼공1","client_2":"쇼공2","client_3":"쇼공3","client_4":"4","client_5":"5"},"client_types":[{"__typename":"Data","id":"2"},{"__typename":"Data","id":"4"}],"main_businesses":[{"__typename":"Data","id":"1"},{"__typename":"Data","id":"2"}],"factory_address":{"__typename":"Address","address":"서울특별시 강남구 도산대로55길 37 (청담동)","detail":"4층"},"license_address":{"__typename":"Address","address":"서울특별시 강남구 도산대로55길 37 (청담동)","detail":"4층"}}}}'
   );
   console.log(data);
-  const myStyles = {
-    paperContainer: {
-      backgroundImage: `url(${work1})`,
-      backgroundRepeat: "no-repeat",
-      backgroundSize: "100% 100%",
-    },
-  };
 
   return (
     <React.Fragment>
       <Parallax
         small
         filter
-        image={require("assets/img/examples/olu-eletu.jpg")}
+        image={require("assets/img/main-image.jpg")}
         className={classes.container}
         style={{ backgroundRepeat: "no-repeat", backgroundSize: "100% 100%" }}
       >
@@ -113,14 +110,11 @@ export default function FactoryDetailPage(props) {
             position: "absolute",
             bottom: "0",
             zIndex: "1",
-            marginBottom: "10px",
+            marginBottom: "20px",
           }}
           xs={12}
         >
           <GridItem>
-            {/* <div>
-                    <img src={work1} alt="..." className={imageClasses} />
-                  </div> */}
             <Typography color="textPrimary" variant="h6">
               <Box
                 fontWeight="fontWeightBold"
@@ -130,17 +124,14 @@ export default function FactoryDetailPage(props) {
                 {data.userInfo.business.license_name}
               </Box>
             </Typography>
-
-            <Box mb={1}>
-              <Typography
-                color="textPrimary"
-                variant="body1"
-                style={{ wordBreak: "keep-all", color: "white" }}
-                className={classes.headerDetailStyle}
-              >
-                {data.userInfo.business.factory_address.address}
-              </Typography>
-            </Box>
+            <Typography
+              color="textPrimary"
+              variant="body1"
+              style={{ wordBreak: "keep-all", color: "white" }}
+              className={classes.headerDetailStyle}
+            >
+              {data.userInfo.business.factory_address.address}
+            </Typography>
 
             <Box>
               <Typography
@@ -186,9 +177,7 @@ export default function FactoryDetailPage(props) {
           </GridItem>
         </GridContainer>
       </Parallax>
-      <div
-        className={classNames(classes.main, classes.mainRaised)}
-      >
+      <div className={classNames(classes.main, classes.mainRaised)}>
         {/* {loading ? (
           <CircularProgress />
         ) : (
@@ -210,7 +199,7 @@ export default function FactoryDetailPage(props) {
             </GridItem>
           </GridContainer>
           <Box mb={3} />
-          <Divider variant="fullWidth"  className={classes.borderStyle}/>
+          <Divider variant="fullWidth" className={classes.borderStyle} />
 
           <GridContainer>
             <GridItem xs={12} sm={12} md={6}>
@@ -236,7 +225,7 @@ export default function FactoryDetailPage(props) {
             </GridItem>
           </GridContainer>
           <Box mb={3} />
-          <Divider variant="fullWidth"  className={classes.borderStyle}/>
+          <Divider variant="fullWidth" className={classes.borderStyle} />
 
           <GridContainer>
             <GridItem xs={12} sm={12} md={6}>
@@ -268,11 +257,11 @@ export default function FactoryDetailPage(props) {
             </GridItem>
           </GridContainer>
           <Box mb={3} />
-          <Divider variant="fullWidth"  className={classes.borderStyle}/>
+          <Divider variant="fullWidth" className={classes.borderStyle} />
 
           {mQuery && !mQuery.matches ? (
             <>
-               <div className={classes.title}>
+              <div className={classes.title}>
                 <h4 className={classes.h3Style}>제조공장 사진</h4>
               </div>
               <GridContainer>
@@ -316,7 +305,11 @@ export default function FactoryDetailPage(props) {
               <SectionCarousel />
             </>
           )}
-          <Divider variant="fullWidth" className={classes.borderStyle} />
+          <Divider
+            variant="fullWidth"
+            className={classes.borderStyle}
+            style={{ marginTop: "30px" }}
+          />
           <div className={classes.title}>
             <h4 className={classes.h3Style}>거래후기</h4>
           </div>

@@ -16,8 +16,8 @@ import Menu from "@material-ui/icons/Menu";
 // core components
 import styles from "assets/jss/material-kit-react/components/headerStyle.js";
 import SearchIcon from "@material-ui/icons/Search";
-import LogoBlack from "assets/img/logo.png";
-import LogoWhite from "assets/img/logo-white.png";
+import LogoBlack from "assets/img/logo.svg";
+import LogoWhite from "assets/img/logo_white.svg";
 
 
 const useStyles = makeStyles((theme) => ({

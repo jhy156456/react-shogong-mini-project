@@ -2,9 +2,7 @@ import React, { useState } from "react";
 import Header from "components/Header/Header.js";
 // pages for this product
 import Components from "views/Components/Components.js";
-import LandingPage from "views/LandingPage/LandingPage.js";
-import FactoryDetailPage from "views/ProfilePage/FactoryDetailPage.js";
-import LoginPage from "views/LoginPage/LoginPage.js";
+import FactoryDetailPage from "views/FactoryDetailPage/FactoryDetailPage.js";
 import { createBrowserHistory } from "history";
 import { Router, Route, Switch } from "react-router-dom";
 import HeaderLinks from "components/Header/HeaderLinks.js";
@@ -35,7 +33,6 @@ function App() {
           />
           <ScrollToTop>
           <Switch>
-            <Route path="/landing-page" component={LandingPage} />
             <Route path="/store/:id" component={FactoryDetailPage} />
             <Route path="/" render={() => <Components />} />
           </Switch>

@@ -1,17 +1,25 @@
 import React from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
-//import Card from "@material-ui/core/Card";
+// @material-ui/core components
+import {
+  CardContent,
+  Typography,
+  IconButton,
+  CardMedia,
+  Box,
+  Grid,
+  CardActionArea,
+} from "@material-ui/core";
+//custom components
 import Card from "components/Card/Card.js";
-import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
-import IconButton from "@material-ui/core/IconButton";
-import Typography from "@material-ui/core/Typography";
-import SkipPreviousIcon from "@material-ui/icons/SkipPrevious";
-import PlayArrowIcon from "@material-ui/icons/PlayArrow";
-import SkipNextIcon from "@material-ui/icons/SkipNext";
-import { Box, Grid } from "@material-ui/core";
-import CardActionArea from "@material-ui/core/CardActionArea";
+//react components
 import { Link } from "react-router-dom";
+//@material-ui/icons
+import {
+  SkipPreviousIcon,
+  PlayArrowIcon,
+  SkipNextIcon,
+} from "@material-ui/icons/SkipPrevious";
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -25,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
   },
   cover: {
     height: "100%",
+    borderRadius: "6px !important",
   },
   controls: {
     display: "flex",
@@ -44,86 +53,92 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 export default function MediaControlCard(props) {
-  const {post} = props;
+  const { post } = props;
   const classes = useStyles();
   const theme = useTheme();
   return (
     <CardActionArea component="div">
       <Card className={classes.root}>
-      <Link
-        underline="none"
-        to={`/store/${props.post.id}`}
-        style={{ textDecoration: "none", color: "white" }}
-      >
-        <Grid container justify={"space-between"}>
-          <Grid item xs={6} >
-            <div className={classes.details}>
-              <CardContent className={classes.content} style={{paddingBottom:"16px"}}>
-                <Typography variant="body1" style={{ fontWeight: "bold" ,color : 'black'}}>
-                  제조사명
-                </Typography>
-                <Typography
-                  variant="h6"
-                  color="textSecondary"
-                  className={classes.h6Style}
+        <Link
+          underline="none"
+          to={`/store/${props.post.id}`}
+          style={{ textDecoration: "none", color: "white" }}
+        >
+          <Grid container justify={"space-between"}>
+            <Grid item xs={6}>
+              <div className={classes.details}>
+                <CardContent
+                  className={classes.content}
+                  style={{ paddingBottom: "16px" }}
                 >
-                  주소
-                </Typography>
-                <Typography
-                  variant="h6"
-                  color="textSecondary"
-                  className={classes.h6Style}
-                >
-                  사업분야
-                </Typography>
-                <Box mb={2} />
-                <Typography
-                  variant="h6"
-                  color="textSecondary"
-                  className={classes.h6Style}
-                >
-                  사업형태
-                </Typography>
-                <Typography
-                  variant="h6"
-                  color="textSecondary"
-                  className={classes.h6Style}
-                >
-                  작업원단
-                </Typography>
-                <Typography
-                  variant="h6"
-                  color="textSecondary"
-                  className={classes.h6Style}
-                >
-                  생산품목
-                </Typography>
-                <Typography
-                  variant="h6"
-                  color="textSecondary"
-                  className={classes.h6Style}
-                >
-                  최소주문수량n개
-                </Typography>
-                <Typography
-                  variant="h6"
-                  color="textSecondary"
-                  className={classes.h6Style}
-                >
-                  쇼공 자체제품 판매 제조사
-                </Typography>
-              </CardContent>
-            </div>
+                  <Typography
+                    variant="body1"
+                    style={{ fontWeight: "bold", color: "black" }}
+                  >
+                    제조사명
+                  </Typography>
+                  <Typography
+                    variant="h6"
+                    color="textSecondary"
+                    className={classes.h6Style}
+                  >
+                    주소
+                  </Typography>
+                  <Typography
+                    variant="h6"
+                    color="textSecondary"
+                    className={classes.h6Style}
+                  >
+                    사업분야
+                  </Typography>
+                  <Box mb={2} />
+                  <Typography
+                    variant="h6"
+                    color="textSecondary"
+                    className={classes.h6Style}
+                  >
+                    사업형태
+                  </Typography>
+                  <Typography
+                    variant="h6"
+                    color="textSecondary"
+                    className={classes.h6Style}
+                  >
+                    작업원단
+                  </Typography>
+                  <Typography
+                    variant="h6"
+                    color="textSecondary"
+                    className={classes.h6Style}
+                  >
+                    생산품목
+                  </Typography>
+                  <Typography
+                    variant="h6"
+                    color="textSecondary"
+                    className={classes.h6Style}
+                  >
+                    최소주문수량n개
+                  </Typography>
+                  <Typography
+                    variant="h6"
+                    color="textSecondary"
+                    className={classes.h6Style}
+                  >
+                    쇼공 자체제품 판매 제조사
+                  </Typography>
+                </CardContent>
+              </div>
+            </Grid>
+            <Grid item xs={6}>
+              <CardMedia
+                className={classes.cover}
+                component="img"
+                image="/static/images/grid-list/mushroom.jpg"
+                title="Live from space album cover"
+              />
+            </Grid>
           </Grid>
-          <Grid item xs={6}>
-            <CardMedia
-              className={classes.cover}
-              component="img"
-              image="/static/images/grid-list/mushroom.jpg"
-              title="Live from space album cover"
-            />
-          </Grid>
-        </Grid>
         </Link>
       </Card>
     </CardActionArea>

@@ -31,7 +31,7 @@ export default function Components(props) {
 
   return (
     <React.Fragment>
-      <Parallax small filter image={require("assets/img/bg5.png")} className={classes.sameContainer}></Parallax>
+      <Parallax small filter image={require("assets/img/main-image.jpg")} className={classes.sameContainer}></Parallax>
 
       <div className={classNames(classes.main, classes.mainRaised)}>
         {/* {loading ? (
