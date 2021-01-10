@@ -4,7 +4,6 @@ import classNames from "classnames";
 // react components for routing our app without refresh
 import { useQuery } from "@apollo/client";
 import { LOGIN_QUERY } from "lib/api/user.js";
-import { Link } from "react-router-dom";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 // @material-ui/icons
@@ -21,20 +20,19 @@ export default function Components(props) {
   const classes = useStyles();
   const { ...rest } = props;
 
-
-  // const { loading, error, data, fetchMore } = useQuery(LOGIN_QUERY, {
-  //   variables: {
-  //     username: process.env.REACT_APP_ID,
-  //     password: process.env.REACT_APP_PW,
-  //   },
-  // });
+  const { loading,  data, fetchMore } = useQuery(LOGIN_QUERY, {
+    variables: {
+      username: process.env.REACT_APP_ID,
+      password: process.env.REACT_APP_PW,
+    },
+  });
 
   return (
     <React.Fragment>
       <Parallax small filter image={require("assets/img/main-image.jpg")} className={classes.sameContainer}></Parallax>
 
       <div className={classNames(classes.main, classes.mainRaised)}>
-        {/* {loading ? (
+        {loading ? (
           <p>불러오는중..</p>
         ) : (
           <div>
@@ -43,11 +41,11 @@ export default function Components(props) {
                 "access_token",
                 data.userCheck.access_token
               );
-              return ;
+              return <MainPage />;
             })()}
           </div>
-        )} */}
-        <MainPage />
+        )}
+        
       </div>
     </React.Fragment>
   );

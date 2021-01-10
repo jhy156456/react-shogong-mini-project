@@ -14,15 +14,12 @@ dotenv.config();
 const httpLink = createHttpLink({
   uri: process.env.REACT_APP_API_URL,
 });
-console.log("Asdf : " + process.env.REACT_APP_API_URL)
 const authLink = setContext((_, { headers }) => {
-  // get the authentication token from local storage if it exists
-  const token = localStorage.getItem("token");
-  // return the headers to the context so httpLink can read them
+  const token =  sessionStorage.getItem("access_token")
   return {
     headers: {
       ...headers,
-      Authorization: sessionStorage.getItem("access_token"),
+      Authorization: token,
     },
   };
 });

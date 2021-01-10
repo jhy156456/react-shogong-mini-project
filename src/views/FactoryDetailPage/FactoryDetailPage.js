@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 //@material-ui/core components
@@ -6,17 +6,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import {
   Box,
   Divider,
-  Grid,
   Typography,
-  CircularProgress,
+  CircularProgress
 } from "@material-ui/core";
-import muiButton from "@material-ui/core/Button";
-//@material-ui/icons
-import {
-  ChatBubbleOutlineIcon,
-  PhoneIcon,
-  FavoriteBorderIcon,
-} from "@material-ui/icons";
 //custom components
 import SectionCarousel from "components/Sections/SectionCarousel.js";
 import Button from "components/CustomButtons/Button.js";
@@ -30,13 +22,13 @@ import styles from "assets/jss/material-kit-react/views/factoryDetailPage.js";
 //graphql
 import { USER_INFO_QUERY } from "lib/api/user.js";
 import { useParams } from "react-router-dom";
-import { Query } from "react-apollo";
 import { useQuery } from "@apollo/client";
 
 const useStyles = makeStyles((theme) => ({
   ...styles,
   headerStye: {
     color: "white",
+    //study jhy
     //min width : 최소 width 가 0px이상인 경우에 적용된다
     //max width : 최대 width 가 767px이하인 경우에 적용된다
     "@media (min-width: 0px)": {
@@ -64,9 +56,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function FactoryDetailPage(props) {
-  const [mQuery, setMQuery] = React.useState({
-    matches: window.innerWidth > 576 ? true : false,
-  });
   useEffect(() => {
     let mediaQuery = window.matchMedia("(min-width: 576px)");
     mediaQuery.addListener(setMQuery);
@@ -74,26 +63,23 @@ export default function FactoryDetailPage(props) {
     return () => mediaQuery.removeListener(setMQuery);
   }, []);
 
+  const [mQuery, setMQuery] = React.useState({
+    matches: window.innerWidth > 576 ? true : false,
+  });
+
   const classes = useStyles();
   const { id } = useParams();
-  // const { loading, error, data, fetchMore } = useQuery(USER_INFO_QUERY, {
-  //   variables: {
-  //     user_id: id,
-  //     business: true,
-  //     deliver: true,
-  //   },
-  // });
-  // if (loading) return <CircularProgress />;
-  const { ...rest } = props;
-  const imageClasses = classNames(
-    classes.imgRaised,
-    classes.imgFluid,
-    classes.imgRounded
-  );
+
   const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
-  const data = JSON.parse(
-    '{"userInfo":{"__typename":"User","username":"overcam","manager":"박윤범","position":"대표","contact":"010-7112-6340","email":"yb@shogong.com","deliver":null,"business":{"__typename":"BusinessInfo","representative":"박윤범","license_name":"쇼공","license_number":"350-88-01464","tax_email":"yb@shogong.com","started":"2019-06-01","description":"공장 직거래 플랫폼을 서비스하고 있습니다.","profile_link":"","license_link":"https://shogong-management.s3.ap-northeast-2.amazonaws.com/overcam/사업자 등록증.pdf","account_link":"https://shogong-management.s3.ap-northeast-2.amazonaws.com/overcam/통장 사본.pdf","client":{"__typename":"Client","client_1":"쇼공1","client_2":"쇼공2","client_3":"쇼공3","client_4":"4","client_5":"5"},"client_types":[{"__typename":"Data","id":"2"},{"__typename":"Data","id":"4"}],"main_businesses":[{"__typename":"Data","id":"1"},{"__typename":"Data","id":"2"}],"factory_address":{"__typename":"Address","address":"서울특별시 강남구 도산대로55길 37 (청담동)","detail":"4층"},"license_address":{"__typename":"Address","address":"서울특별시 강남구 도산대로55길 37 (청담동)","detail":"4층"}}}}'
-  );
+
+  const { loading, error, data } = useQuery(USER_INFO_QUERY, {
+    variables: {
+      user_id: id,
+      business: true,
+      deliver: true,
+    },
+  });
+  if (loading || error) return <CircularProgress />;
   console.log(data);
 
   return (
@@ -103,7 +89,7 @@ export default function FactoryDetailPage(props) {
         filter
         image={require("assets/img/main-image.jpg")}
         className={classes.container}
-        style={{ backgroundRepeat: "no-repeat", backgroundSize: "100% 100%" }}
+        // style={{ backgroundRepeat: "no-repeat", backgroundSize: "100% 100%" }}
       >
         <GridContainer
           style={{
@@ -112,7 +98,6 @@ export default function FactoryDetailPage(props) {
             zIndex: "1",
             marginBottom: "20px",
           }}
-          xs={12}
         >
           <GridItem>
             <Typography color="textPrimary" variant="h6">
@@ -178,12 +163,10 @@ export default function FactoryDetailPage(props) {
         </GridContainer>
       </Parallax>
       <div className={classNames(classes.main, classes.mainRaised)}>
-        {/* {loading ? (
+        {loading ? (
           <CircularProgress />
         ) : (
-         
-        )} */}
-        <div className={classes.container}>
+         <div className={classes.container}>
           <GridContainer>
             <GridItem xs={12} sm={12} md={12}>
               <div className={classes.title}>
@@ -315,6 +298,8 @@ export default function FactoryDetailPage(props) {
           </div>
           <Comments />
         </div>
+        )}
+        
       </div>
     </React.Fragment>
   );

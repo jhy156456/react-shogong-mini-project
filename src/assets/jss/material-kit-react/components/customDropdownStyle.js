@@ -24,7 +24,7 @@ const customDropdownStyle = theme => ({
     boxShadow: "0 2px 5px 0 rgba(0, 0, 0, 0.26)",
     top: "100%",
     zIndex: "1000",
-    minWidth: "160px",
+    minWidth: "auto",
     padding: "5px 0",
     margin: "2px 0 0",
     fontSize: "14px",
@@ -34,7 +34,7 @@ const customDropdownStyle = theme => ({
     backgroundClip: "padding-box"
   },
   menuList: {
-    padding: "0"
+    padding: "0",
   },
   popperResponsive: {
     zIndex: "1200",

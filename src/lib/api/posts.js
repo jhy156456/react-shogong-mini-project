@@ -1,5 +1,3 @@
-import qs from "qs";
-
 import { gql } from "apollo-boost";
 
 export const LIST_STORES_QUERY = gql`

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Header from "components/Header/Header.js";
 // pages for this product
 import Components from "views/Components/Components.js";
@@ -9,7 +9,6 @@ import HeaderLinks from "components/Header/HeaderLinks.js";
 import Footer from "components/Footer/Footer.js";
 import {
   SearchInputContextProvider,
-  SearchInputConsumer,
 } from "contexts/search.js";
 import ScrollToTop from './components/common/ScrollToTop';
 

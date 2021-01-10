@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext } from "react";
+import React from "react";
 // nodejs library to set properties for components
 import PropTypes from "prop-types";
 // nodejs library that concatenates classes
@@ -11,7 +11,6 @@ import Input from "@material-ui/core/Input";
 
 import styles from "assets/jss/material-kit-react/components/customInputStyle.js";
 import {
-  SearchInputContextProvider,
   SearchInputConsumer,
 } from "contexts/search.js";
 
@@ -26,16 +25,10 @@ export default function CustomInput(props) {
     labelProps,
     inputProps,
     error,
-    white,
     inputRootCustomClasses,
     success,
     black,
   } = props;
-  const hi = (e) => {
-    setSearchInput(e.target.value);
-  };
-
-  const [searchInput, setSearchInput] = useState("");
 
   const labelClasses = classNames({
     [" " + classes.labelRootError]: error,

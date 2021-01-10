@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect} from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // nodejs library to set properties for components
@@ -22,27 +22,6 @@ import styles from "assets/jss/material-kit-react/components/customDropdownStyle
 const useStyles = makeStyles(styles);
 
 export default function CustomDropdown(props) {
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const handleClick = event => {
-    if (anchorEl && anchorEl.contains(event.target)) {
-      setAnchorEl(null);
-    } else {
-      setAnchorEl(event.currentTarget);
-    }
-  };
-  const handleClose = param => {
-    setAnchorEl(null);
-    if (props && props.onClick) {
-      props.onClick(param);
-    }
-  };
-  const handleCloseAway = event => {
-    if (anchorEl.contains(event.target)) {
-      return;
-    }
-    setAnchorEl(null);
-  };
-  const classes = useStyles();
   const {
     buttonText,
     buttonIcon,
@@ -54,8 +33,38 @@ export default function CustomDropdown(props) {
     hoverColor,
     left,
     rtlActive,
-    noLiPadding
+    noLiPadding,
+    style,
+    onClick,
   } = props;
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [selectedItem , setSelectedItem] = React.useState('');
+
+  const handleClick = event => {
+    if (anchorEl && anchorEl.contains(event.target)) {
+      setAnchorEl(null);
+    } else {
+      setAnchorEl(event.currentTarget);
+    }
+  };
+  const handleClose = param => {
+    setSelectedItem(param);
+    setAnchorEl(null);
+    if (props && props.onClick) {
+      onClick(param);
+    }
+  };
+  const handleCloseAway = event => {
+    if (anchorEl.contains(event.target)) {
+      return;
+    }
+    setAnchorEl(null);
+  };
+  const classes = useStyles();
+
+  useEffect(()=>{
+    setSelectedItem(buttonText);
+  },[buttonText])
   const caretClasses = classNames({
     [classes.caret]: true,
     [classes.caretActive]: Boolean(anchorEl),
@@ -83,6 +92,7 @@ export default function CustomDropdown(props) {
     <div>
       <div>
         <Button
+          style={style}
           aria-label="Notifications"
           aria-owns={anchorEl ? "menu-list" : null}
           aria-haspopup="true"
@@ -90,7 +100,7 @@ export default function CustomDropdown(props) {
           onClick={handleClick}
         >
           {icon}
-          {buttonText !== undefined ? buttonText : null}
+          {selectedItem !== undefined ? selectedItem : null}
           {caret ? <b className={caretClasses} /> : null}
         </Button>
       </div>
@@ -125,7 +135,7 @@ export default function CustomDropdown(props) {
           >
             <Paper className={classes.dropdown}>
               <ClickAwayListener onClickAway={handleCloseAway}>
-                <MenuList role="menu" className={classes.menuList}>
+                <MenuList role="menu" className={classes.menuList} >
                   {dropdownHeader !== undefined ? (
                     <MenuItem
                       onClick={() => handleClose(dropdownHeader)}
@@ -146,6 +156,8 @@ export default function CustomDropdown(props) {
                     }
                     return (
                       <MenuItem
+                      // style={{display:'table-cell',
+                      // wordWrap: 'break-word',verticalAlign:'middle'}}
                         key={key}
                         onClick={() => handleClose(prop)}
                         className={dropdownItem}

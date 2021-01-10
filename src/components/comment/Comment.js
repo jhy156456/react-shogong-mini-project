@@ -29,14 +29,12 @@ const Comment = ({ comments }) => {
   return (
     <List  disablePadding={true} classes={{root:classes.root}}>
       {comments.map((comment) => {
-        console.log("Comment", comment);
         return (
           <React.Fragment key={comment.id}>
             <ListItem
               key={comment.id}
               alignItems="flex-start"
               disableGutters={true}
-              classes={{ ListItem: "MuiListItem-gutters" }}
             >
               <ListItemText
                 primary={
