@@ -39,7 +39,8 @@ export default function Components(props) {
             {(function () {
               sessionStorage.setItem(
                 "access_token",
-                data.userCheck.access_token
+                //data.userCheck.access_token
+                "asdfasdf"
               );
               return <MainPage />;
             })()}

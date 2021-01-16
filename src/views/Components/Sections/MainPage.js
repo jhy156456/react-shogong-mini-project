@@ -105,9 +105,9 @@ export default function MainPage() {
   const onLoadMore = useCallback(() => {
     fetchMore({
       variables: {
-        page: data.adminUser.result.length,
-        user_id: "shogong",
-        required: true,
+        // page: data.adminUser.result.length,
+        // user_id: "shogong",
+        // required: true,
       },
       updateQuery: (prev, { fetchMoreResult }) => {
         if (!fetchMoreResult) return prev;
@@ -355,11 +355,11 @@ export default function MainPage() {
               <CircularProgress />
             ) : (
               <>
-              {data.adminUser.result.map((post) => (
+              {/* {data.adminUser.result.map((post) => (
                 <GridItem xs={12} sm={12} md={6} key={post.id}>
                   <FactoryCards headerColor="primary" post={post} />
                 </GridItem>
-              ))}
+              ))} */}
               </>
             )}
           </GridContainer>

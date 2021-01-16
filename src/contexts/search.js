@@ -1,7 +1,7 @@
 import React, { createContext, useState } from "react";
 
 const SearchInputContext = createContext({
-  state: { input: "" },
+  state: { input: "", headerColor: "white" },
   actions: {
     setInput: () => {},
   },
@@ -9,10 +9,11 @@ const SearchInputContext = createContext({
 
 const SearchInputContextProvider = ({ children }) => {
   const [input, setInput] = useState("");
+  const [headerColor , setHeaderColor] = useState("white");
   const value = {
-    state: { input },
-    actions: { setInput },
-  }
+    state: { input,headerColor },
+    actions: { setInput,setHeaderColor },
+  };
   return (
     <SearchInputContext.Provider value={value}>
       {children}
