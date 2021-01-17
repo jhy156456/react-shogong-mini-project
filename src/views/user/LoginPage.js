@@ -7,7 +7,9 @@ import React, {
 } from "react";
 // import { useRouter } from "next/router";
 // import Head from "next/head";
- import {Link} from "react-router-dom";
+// nodejs library that concatenates classes
+import classNames from "classnames";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Alert from "@material-ui/lab/Alert";
 import setClient from "lib/api/setClient";
@@ -21,19 +23,26 @@ import {
   Snackbar,
   Checkbox,
   Divider,
+  FormControlLabel,
+  Button,
+  CircularProgress,
+  Box
 } from "@material-ui/core";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-//import Alert from "@material-ui/lab/Alert";
+
 //import { Checkbox, Divider } from "semantic-ui-react";
 
 import BasicBtn from "components/common/BasicBtn";
 import ButtonBox from "components/common/ButtonBox";
 import Background from "components/Background";
+//style
+import styles from "assets/jss/material-kit-react/views/factoryDetailPage.js";
 
 const MainWrapper = styled.div`
   display: flex;
   justify-content: center;
   background-color: #fff;
+  padding-top: 50px;
 `;
 
 const Wrapper = styled.main`
@@ -52,6 +61,8 @@ const LoginWrapper = styled.div`
   align-items: center;
   justify-content: center;
   width: 360px;
+  padding-left: 16px;
+  padding-right: 16px;
 `;
 
 const LogoBox = styled.div`
@@ -87,6 +98,7 @@ const savedUser = typeof window !== "undefined" && localStorage.getItem("user");
 const admin = true;
 
 const useStyles = makeStyles((theme) => ({
+  ...styles,
   avatar: {
     margin: theme.spacing(1),
     backgroundColor: "#5e94e4",
@@ -107,6 +119,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "0.5em",
     color: "rgba(0, 0, 0, 0.54)",
     fontSize: "0.875rem",
+    alignItems: "center",
   },
   find: {
     display: "flex",
@@ -143,7 +156,7 @@ const boxStyle = {
 
 const LoginPage = ({ history }) => {
   const client = setClient();
-  
+  const classes = useStyles();
 
   const [formData, setFormData] = useState({
     username: savedUser ? savedUser : "",
@@ -159,7 +172,6 @@ const LoginPage = ({ history }) => {
   });
   const [loading, setLoading] = useState(false);
 
-  const classes = useStyles();
   const btnStyle = useMemo(
     () => ({ backgroundColor: "#3e6baf", color: "#fff" }),
     []
@@ -171,11 +183,11 @@ const LoginPage = ({ history }) => {
   //   }
   // }, [admin, router]);
 
-  console.log(formData);
 
   const onSubmit = useCallback(
     (e) => {
       e.preventDefault();
+      console.log("setloading")
       setLoading(true);
       formData.saveUser && localStorage.setItem("user", formData.username);
       client
@@ -188,11 +200,11 @@ const LoginPage = ({ history }) => {
             },
           }) => {
             setLoading(false);
-            console.log("username: ", username);
-            console.log("deliver: ", deliver);
-            console.log("business: ", business);
-            console.log("individual: ", individual);
-            console.log("access_token: ", access_token);
+            // console.log("username: ", username);
+            // console.log("deliver: ", deliver);
+            // console.log("business: ", business);
+            // console.log("individual: ", individual);
+            // console.log("access_token: ", access_token);
             sessionStorage.setItem(
               "role",
               username === "shogong" ? "admin" : "individual"
@@ -205,7 +217,12 @@ const LoginPage = ({ history }) => {
           }
         )
         .catch((e) => {
+          console.log("catch")
+          for(var i=0 ; i<1099999000;i++){
+
+          }
           setLoading(false);
+
           setError("아이디나 비밀번호를 확인해주세요");
           setErrorState({ ...errorState, open: true });
           console.error(e);
@@ -240,9 +257,11 @@ const LoginPage = ({ history }) => {
       {/* <Head>
         <title>로그인 | 쇼공, 쇼핑을 공장에서</title>
       </Head> */}
-      <MainWrapper>
+      <MainWrapper className={classNames(classes.main, classes.mainRaised)}>
         <Wrapper>
-          <LoginWrapper>
+          <LoginWrapper
+          
+          >
             <LogoBox>
               <Link href="/">
                 <a>
@@ -290,35 +309,58 @@ const LoginPage = ({ history }) => {
                 >
                   아이디/비밀번호 찾기
                 </div>
-                <Checkbox
-                  checked={formData.saveUser}
-                  name="saveUser"
-                  onClick={() =>
-                    setFormData({ ...formData, saveUser: !formData.saveUser })
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={formData.saveUser}
+                      name="saveUser"
+                      onClick={() =>
+                        setFormData({
+                          ...formData,
+                          saveUser: !formData.saveUser,
+                        })
+                      }
+                    />
                   }
-                  label="아이디 기억하기"
-                  style={{ fontSize: "0.875rem" }}
+                  
+                  label={
+                    <Box  style={{ fontSize: "0.875rem" }}>
+
+아이디 기억하기
+                    </Box>
+                  }     
                 />
               </div>
-              <Divider />
+              <Divider 
+                style={{marginBottom:"10px"}}              
+              />
               <ButtonBox margin={boxStyle} justify="space-between">
-                <BasicBtn
+                <Button
                   type="submit"
                   fluid
                   className="btn"
                   onClick={onClick}
-                  loading={loading}
-                  content="로그인"
-                />
+                  variant="contained"
+                  fullWidth
+                  color="primary"
+
+                >
+                  {!loading && "로그인"}
+                  {loading && <CircularProgress disableShrink  color="secondary" size={30} />}
+                </Button>
               </ButtonBox>
               <ButtonBox margin={boxStyle} justify="space-between">
-                <BasicBtn
+                <Button
                   style={btnStyle}
                   fluid
                   className="btn"
+                  variant="contained"
+                  fullWidth
+                  color="primary"
                   onClick={goToSignin}
-                  content="회원가입"
-                />
+                >
+                  회원가입
+                </Button>
               </ButtonBox>
             </form>
             <Copyright />
@@ -333,7 +375,7 @@ const LoginPage = ({ history }) => {
                   autoHideDuration={6000}
                   onClose={onClose}
                 >
-                  <Alert variant="filled" severity="error">
+                  <Alert variant="filled" severity="error" style={{paddingTop:"50px"}}>
                     {error}
                   </Alert>
                 </Snackbar>

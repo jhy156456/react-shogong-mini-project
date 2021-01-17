@@ -59,11 +59,10 @@ export default function HeaderLinks(props) {
       <ListItem className={classes.listItem}>
       <Button
             color="transparent"
-            href="https://www.shogong.com/"
-            target="_blank"
+            href="http://localhost:3000/login"
             className={classes.navLink}
           >
-            <h6>쇼공 바로가기</h6>
+            <h6>로그인</h6>
             {/* <i className={classes.socialIcons + " fab fa-instagram"} /> */}
           </Button>
       </ListItem>
@@ -76,8 +75,7 @@ export default function HeaderLinks(props) {
         > */}
           <Button
             color="transparent"
-            href="http://manage.shogong.com/register/user"
-            target="_blank"
+            href="http://localhost:3000/signin"
             className={classes.navLink}
           >
             <h6>회원가입</h6>

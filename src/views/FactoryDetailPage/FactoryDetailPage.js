@@ -29,7 +29,10 @@ const useStyles = makeStyles((theme) => ({
   headerStye: {
     color: "white",
     //study jhy
-    //min width : 최소 width 가 0px이상인 경우에 적용된다
+    // "@media (min-width: 576px)": {
+    //   maxWidth: "540px"
+    // },BasicBtn
+    //min width : 최소 width 가 0px이상인 경우에 적용된다 -> 전체
     //max width : 최대 width 가 767px이하인 경우에 적용된다
     "@media (min-width: 0px)": {
       fontSize: "1rem",

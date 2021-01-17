@@ -15,6 +15,7 @@ import {
   TextField,
   Typography,
   makeStyles,
+  CircularProgress,
 } from "@material-ui/core";
 
 // nodejs library that concatenates classes
@@ -56,6 +57,12 @@ const LicenseConfirm = styled.p`
 const useStyles = makeStyles((theme) => ({
   ...styles,
   ...javascriptStyles,
+  snackbarAlertStlye:{
+    paddingTop:"50px",
+  },
+  endAdornment:{
+    paddingRight:"0px",
+  }
 }));
 const SignInPage = ({ history }) => {
   const [classicModal, setClassicModal] = useState(false);
@@ -151,7 +158,7 @@ const SignInPage = ({ history }) => {
           onClose={onClose}
           TransitionComponent={Transition}
         >
-          <Alert variant="filled" severity="error">
+          <Alert variant="filled" severity="error" className={classes.snackbarAlertStlye}>
             아이디 중복확인을 진행해주세요.
           </Alert>
         </Snackbar>
@@ -185,7 +192,7 @@ const SignInPage = ({ history }) => {
         onClose={onClose}
         TransitionComponent={Transition}
       >
-        <Alert variant="filled" severity="error">
+        <Alert variant="filled" severity="error" className={classes.snackbarAlertStlye}>
           모든 정보를 빠짐없이 입력해주세요.
         </Alert>
       </Snackbar>
@@ -273,7 +280,7 @@ const SignInPage = ({ history }) => {
   };
 
   const btnAction = (
-    <BasicBtn
+    <Button
       name="idCheck"
       onClick={idOverlapCheck}
       loading={loading}
@@ -285,6 +292,7 @@ const SignInPage = ({ history }) => {
             ? "green"
             : !loading && overlapCheck === true && "red",
         color: "#fff",
+        minWidth:"80px",
       }}
       disabled={
         !loading && overlapCheck === "initial"
@@ -293,14 +301,16 @@ const SignInPage = ({ history }) => {
           ? true
           : !loading && !overlapCheck && true
       }
-      content={
+    >
+      {
         !loading && overlapCheck === "initial"
           ? "중복확인"
           : !loading && overlapCheck === false
           ? "사용가능"
           : "사용불가"
       }
-    />
+      {loading && <CircularProgress disableShrink  color="secondary" size={30} />}
+    </Button>
   );
 
   // 휴대폰 번호 인증 관련 함수
@@ -338,9 +348,9 @@ const SignInPage = ({ history }) => {
         flexDirection="column"
         height="100%"
         justifyContent="center"
-        style={{ paddingTop: "100px" }}
+        style={{ paddingTop: "120px" }}
       >
-        <Container maxWidth="sm">
+        <Container maxWidth="xs">
           <Formik>
             <form onSubmit={onSubmit}>
               {[
@@ -435,11 +445,15 @@ const SignInPage = ({ history }) => {
                     autoFocus={name === "username"}
                     onChange={onChange}
                     error={error}
-                    action={action}
+                    InputProps={{endAdornment: action,    classes: {
+                      adornedEnd: classes.endAdornment
+                    }}}
+                    // action={action}
                     onKeyUp={func}
                     variant="outlined"
                     fullWidth
                     margin="normal"
+                    className={classes.root}
                   />
                 )
               )}
@@ -456,8 +470,8 @@ const SignInPage = ({ history }) => {
                 동의하고 회원가입
               </Button>
               <LicenseConfirm>
-                회원가입 시 <Typography></Typography>
-                <Link onClick={() => setClassicModal(true)} variant="body2">
+                회원가입 시 
+                <Link onClick={() => setClassicModal(true)}>
                   이용약관 및 개인정보 수집 항목
        
                 </Link>
@@ -469,7 +483,9 @@ const SignInPage = ({ history }) => {
                 에 동의하는 것으로 간주합니다.
               </LicenseConfirm>
             </form>
+            
           </Formik>
+          {errorState.open && <AlertToast Transition={errorState.Transition} />}
         </Container>
       </Box>
     </div>
