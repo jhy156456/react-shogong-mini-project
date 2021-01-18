@@ -20,12 +20,15 @@ export default function Components(props) {
   const classes = useStyles();
   const { ...rest } = props;
 
-  const { loading,  data, fetchMore } = useQuery(LOGIN_QUERY, {
+  const { loading,  data } = useQuery(LOGIN_QUERY, {
     variables: {
-      username: process.env.REACT_APP_ID,
-      password: process.env.REACT_APP_PW,
+      username: "shogong",
+      password: "tyrhd",
     },
   });
+  console.log("Components.js")
+  console.log(data)
+  
 
   return (
     <React.Fragment>
@@ -39,8 +42,7 @@ export default function Components(props) {
             {(function () {
               sessionStorage.setItem(
                 "access_token",
-                //data.userCheck.access_token
-                "asdfasdf"
+                data.userCheck.access_token
               );
               return <MainPage />;
             })()}

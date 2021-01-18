@@ -42,10 +42,12 @@ export default function MainPage() {
   const { loading,data, fetchMore } = useQuery(LIST_STORES_QUERY, {
     variables: {
       page: 0,
-      user_id: "shogong",
+      user_id:"shogong",
       required: true,
     },
   });
+  console.log("Mainpage")
+  console.log(data);
 
   const onSearchButtonClick = (e, value) => {
     console.log(e);
@@ -102,12 +104,14 @@ export default function MainPage() {
       id: 5,
     },
   ]);
+
+  
   const onLoadMore = useCallback(() => {
     fetchMore({
       variables: {
-        // page: data.adminUser.result.length,
-        // user_id: "shogong",
-        // required: true,
+        page: data ? data.adminUser.result.length : 0,
+        user_id: "shogong",
+        required: true,
       },
       updateQuery: (prev, { fetchMoreResult }) => {
         if (!fetchMoreResult) return prev;
@@ -171,7 +175,6 @@ export default function MainPage() {
       )
     );
   }, []);
-  console.log("리셋");
   return (
     <div className={classes.sections}>
       <div className={classes.container}>
@@ -355,11 +358,11 @@ export default function MainPage() {
               <CircularProgress />
             ) : (
               <>
-              {/* {data.adminUser.result.map((post) => (
+              {data && data.adminUser.result.map((post) => (
                 <GridItem xs={12} sm={12} md={6} key={post.id}>
                   <FactoryCards headerColor="primary" post={post} />
                 </GridItem>
-              ))} */}
+              ))}
               </>
             )}
           </GridContainer>
