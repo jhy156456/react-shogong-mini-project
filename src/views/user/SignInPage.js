@@ -57,17 +57,16 @@ const LicenseConfirm = styled.p`
 const useStyles = makeStyles((theme) => ({
   ...styles,
   ...javascriptStyles,
-  snackbarAlertStlye:{
-    paddingTop:"50px",
+  snackbarAlertStlye: {
+    paddingTop: "50px",
   },
-  endAdornment:{
-    paddingRight:"0px",
-  }
+  endAdornment: {
+    paddingRight: "0px",
+  },
 }));
 const SignInPage = ({ history }) => {
   const [classicModal, setClassicModal] = useState(false);
   const onClickClassicModal = (isOpen) => {
-    console.log("SignInPage)"+isOpen);
     setClassicModal(isOpen);
   };
 
@@ -157,8 +156,12 @@ const SignInPage = ({ history }) => {
           autoHideDuration={4000}
           onClose={onClose}
           TransitionComponent={Transition}
+          className={classes.snackbarAlertStlye}
         >
-          <Alert variant="filled" severity="error" className={classes.snackbarAlertStlye}>
+          <Alert
+            variant="filled"
+            severity="error"
+          >
             아이디 중복확인을 진행해주세요.
           </Alert>
         </Snackbar>
@@ -191,8 +194,13 @@ const SignInPage = ({ history }) => {
         autoHideDuration={4000}
         onClose={onClose}
         TransitionComponent={Transition}
+        className={classes.snackbarAlertStlye}
+
       >
-        <Alert variant="filled" severity="error" className={classes.snackbarAlertStlye}>
+        <Alert
+          variant="filled"
+          severity="error"
+        >
           모든 정보를 빠짐없이 입력해주세요.
         </Alert>
       </Snackbar>
@@ -257,6 +265,7 @@ const SignInPage = ({ history }) => {
       })
       .then(({ userOverlap }) => {
         setLoading(false);
+        console.log("received userOverlap : "+ userOverlap)
         setOverlapCheck(userOverlap);
         userOverlap
           ? alert(
@@ -283,7 +292,6 @@ const SignInPage = ({ history }) => {
     <Button
       name="idCheck"
       onClick={idOverlapCheck}
-      loading={loading}
       style={{
         backgroundColor:
           (!loading && overlapCheck === "initial") || loading
@@ -292,7 +300,7 @@ const SignInPage = ({ history }) => {
             ? "green"
             : !loading && overlapCheck === true && "red",
         color: "#fff",
-        minWidth:"80px",
+        minWidth: "100px",
       }}
       disabled={
         !loading && overlapCheck === "initial"
@@ -302,14 +310,15 @@ const SignInPage = ({ history }) => {
           : !loading && !overlapCheck && true
       }
     >
-      {
-        !loading && overlapCheck === "initial"
-          ? "중복확인"
-          : !loading && overlapCheck === false
-          ? "사용가능"
-          : "사용불가"
-      }
-      {loading && <CircularProgress disableShrink  color="secondary" size={30} />}
+      {console.log("button overlapCheck : " + overlapCheck)}
+      {console.log("loading : " + loading)}
+      {!loading && overlapCheck === "initial"
+        ? "중복확인"
+        : !loading && overlapCheck === false
+        ? "사용가능"
+        : loading? "":"사용불가"}
+      {loading  && overlapCheck === "initial" &&
+        <CircularProgress disableShrink color="secondary" size={30} />}
     </Button>
   );
 
@@ -416,7 +425,7 @@ const SignInPage = ({ history }) => {
                   !!formData.email &&
                     !validation.email && {
                       content: "올바른 이메일 형식이 아닙니다.",
-                    },
+                    }, //error변수
                 ],
               ].map(
                 ([
@@ -444,10 +453,12 @@ const SignInPage = ({ history }) => {
                     }
                     autoFocus={name === "username"}
                     onChange={onChange}
-                    error={error}
-                    InputProps={{endAdornment: action,    classes: {
-                      adornedEnd: classes.endAdornment
-                    }}}
+                    InputProps={{
+                      endAdornment: action,
+                      classes: {
+                        adornedEnd: classes.endAdornment,
+                      },
+                    }}
                     // action={action}
                     onKeyUp={func}
                     variant="outlined"
@@ -458,8 +469,6 @@ const SignInPage = ({ history }) => {
                 )
               )}
               <Button
-                loading={formLoading}
-                fluid
                 onClick={() => onClickToast(GrowTransition)}
                 size="large"
                 type="submit"
@@ -467,23 +476,22 @@ const SignInPage = ({ history }) => {
                 fullWidth
                 color="primary"
               >
+                {/* formLoading으로 사용 */}
                 동의하고 회원가입
               </Button>
               <LicenseConfirm>
-                회원가입 시 
+                회원가입 시
                 <Link onClick={() => setClassicModal(true)}>
                   이용약관 및 개인정보 수집 항목
-       
                 </Link>
                 <TermsOfUse
-                    classes={classes}
-                    onClickClassicModal={onClickClassicModal}
-                    classicModal={classicModal}
-                  />
+                  classes={classes}
+                  onClickClassicModal={onClickClassicModal}
+                  classicModal={classicModal}
+                />
                 에 동의하는 것으로 간주합니다.
               </LicenseConfirm>
             </form>
-            
           </Formik>
           {errorState.open && <AlertToast Transition={errorState.Transition} />}
         </Container>

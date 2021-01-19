@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 export default function MainPage() {
-  const { loading,data, fetchMore } = useQuery(LIST_STORES_QUERY, {
+  const { loading,data, fetchMore,error } = useQuery(LIST_STORES_QUERY, {
     variables: {
       page: 0,
       user_id:"shogong",
@@ -48,7 +48,7 @@ export default function MainPage() {
   });
   console.log("Mainpage")
   console.log(data);
-
+  console.log(error)
   const onSearchButtonClick = (e, value) => {
     console.log(e);
     e.preventDefault();

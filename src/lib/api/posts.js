@@ -6,8 +6,8 @@ export const LIST_STORES_QUERY = gql`
       result {
         id
         contact
-        manager
-        position
+        name
+        info
         business {
           license_name
           category {

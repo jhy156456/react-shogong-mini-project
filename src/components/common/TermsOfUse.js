@@ -31,7 +31,6 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 Transition.displayName = "Transition";
 const TermsOfUse = ({ classes, onClickClassicModal,onClose, ...props }) => {
   const {classicModal} = props;
-  console.log("TermsOfUse : " + onClickClassicModal);
 
   return (
     <>

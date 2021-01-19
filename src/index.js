@@ -15,7 +15,7 @@ const httpLink = createHttpLink({
   uri: process.env.REACT_APP_API_URL,
 });
 const authLink = setContext((_, { headers }) => {
-  const token =  sessionStorage.getItem("access_token")
+  const token =  sessionStorage.getItem("access_token");
   return {
     headers: {
       ...headers,

@@ -1,18 +1,19 @@
 import React, { createContext, useState } from "react";
 
 const SearchInputContext = createContext({
-  state: { input: "", headerColor: "white" },
+  state: { input: "", username: "" },
   actions: {
     setInput: () => {},
+    setUserName:()=>{},
   },
 });
 
 const SearchInputContextProvider = ({ children }) => {
   const [input, setInput] = useState("");
-  const [headerColor , setHeaderColor] = useState("white");
+  const [username , setUserName] = useState("");
   const value = {
-    state: { input,headerColor },
-    actions: { setInput,setHeaderColor },
+    state: { input,username },
+    actions: { setInput,setUserName },
   };
   return (
     <SearchInputContext.Provider value={value}>

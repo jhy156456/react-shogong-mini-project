@@ -21,8 +21,9 @@ function App() {
       {/* style={{ paddingLeft: 40, paddingRight: 40 }} */}
       {console.log("??")}
       <SearchInputContextProvider>
+
         <Router history={hist}>
-          <Header
+        <Header
             brand="쇼핑을공장에서"
             rightLinks={<HeaderLinks />}
             fixed

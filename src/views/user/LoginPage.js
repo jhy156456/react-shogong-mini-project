@@ -14,7 +14,9 @@ import styled from "styled-components";
 import Alert from "@material-ui/lab/Alert";
 import setClient from "lib/api/setClient";
 import * as authAPI from "lib/api/auth";
-
+import { useHistory } from 'react-router'
+//context API
+import { SearchInputConsumer } from "contexts/search.js";
 import {
   makeStyles,
   Avatar,
@@ -26,7 +28,7 @@ import {
   FormControlLabel,
   Button,
   CircularProgress,
-  Box
+  Box,
 } from "@material-ui/core";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 
@@ -154,7 +156,8 @@ const boxStyle = {
   bottom: "0.7rem",
 };
 
-const LoginPage = ({ history }) => {
+const LoginPage = ( ) => {
+  const history = useHistory();
   const client = setClient();
   const classes = useStyles();
 
@@ -183,11 +186,10 @@ const LoginPage = ({ history }) => {
   //   }
   // }, [admin, router]);
 
-
   const onSubmit = useCallback(
     (e) => {
       e.preventDefault();
-      console.log("setloading")
+      console.log("setloading");
       setLoading(true);
       formData.saveUser && localStorage.setItem("user", formData.username);
       client
@@ -217,10 +219,8 @@ const LoginPage = ({ history }) => {
           }
         )
         .catch((e) => {
-          console.log("catch")
-          for(var i=0 ; i<1099999000;i++){
-
-          }
+          console.log("catch");
+          for (var i = 0; i < 1099999000; i++) {}
           setLoading(false);
 
           setError("아이디나 비밀번호를 확인해주세요");
@@ -259,14 +259,10 @@ const LoginPage = ({ history }) => {
       </Head> */}
       <MainWrapper className={classNames(classes.main, classes.mainRaised)}>
         <Wrapper>
-          <LoginWrapper
-          
-          >
+          <LoginWrapper>
             <LogoBox>
-              <Link href="/">
-                <a>
-                  <img alt="쇼공 로고" src="/logo.svg" />
-                </a>
+              <Link to="/">
+                <img alt="쇼공 로고" src="/logo.svg" />
               </Link>
             </LogoBox>
             <Avatar className={classes.avatar}>
@@ -322,37 +318,34 @@ const LoginPage = ({ history }) => {
                       }
                     />
                   }
-                  
                   label={
-                    <Box  style={{ fontSize: "0.875rem" }}>
-
-아이디 기억하기
-                    </Box>
-                  }     
+                    <Box style={{ fontSize: "0.875rem" }}>아이디 기억하기</Box>
+                  }
                 />
               </div>
-              <Divider 
-                style={{marginBottom:"10px"}}              
-              />
+              <Divider style={{ marginBottom: "10px" }} />
               <ButtonBox margin={boxStyle} justify="space-between">
                 <Button
                   type="submit"
-                  fluid
                   className="btn"
                   onClick={onClick}
                   variant="contained"
                   fullWidth
                   color="primary"
-
                 >
                   {!loading && "로그인"}
-                  {loading && <CircularProgress disableShrink  color="secondary" size={30} />}
+                  {loading && (
+                    <CircularProgress
+                      disableShrink
+                      color="secondary"
+                      size={30}
+                    />
+                  )}
                 </Button>
               </ButtonBox>
               <ButtonBox margin={boxStyle} justify="space-between">
                 <Button
                   style={btnStyle}
-                  fluid
                   className="btn"
                   variant="contained"
                   fullWidth
@@ -375,7 +368,11 @@ const LoginPage = ({ history }) => {
                   autoHideDuration={6000}
                   onClose={onClose}
                 >
-                  <Alert variant="filled" severity="error" style={{paddingTop:"50px"}}>
+                  <Alert
+                    variant="filled"
+                    severity="error"
+                    style={{ paddingTop: "50px" }}
+                  >
                     {error}
                   </Alert>
                 </Snackbar>
