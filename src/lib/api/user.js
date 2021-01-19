@@ -22,8 +22,8 @@ export const USER_INFO_QUERY = gql`
   query infoQuery($user_id: ID, $business: Boolean, $deliver: Boolean) {
     userInfo(user_id: $user_id, business: $business, deliver: $deliver) {
       username
-      manager
-      position
+      name
+      info
       contact
       email
       deliver {
