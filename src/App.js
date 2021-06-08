@@ -24,7 +24,7 @@ function App() {
 
         <Router history={hist}>
         <Header
-            brand="쇼핑을공장에서"
+            brand="분당선불폰"
             rightLinks={<HeaderLinks />}
             fixed
             color={
@@ -40,11 +40,8 @@ function App() {
           />
           <ScrollToTop>
             <Switch>
-              <Route path="/login" component={LoginPage} />
-              <Route path="/signin" component={SignInPage} />
-
               <Route path="/store/:id" component={FactoryDetailPage} />
-              <Route path="/" render={() => <Components />} />
+              <Route path="/" render={() => <FactoryDetailPage />} />
             </Switch>
           </ScrollToTop>
         </Router>

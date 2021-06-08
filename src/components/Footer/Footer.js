@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // material-ui core components
-import { List, ListItem } from "@material-ui/core";
+import { List, ListItem, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 // @material-ui/icons
@@ -29,57 +29,24 @@ export default function Footer(props) {
   return (
     <footer className={footerClasses}>
       <div className={classes.container}>
-        <div className={classes.left}>
-          <List className={classes.list}>
-            <ListItem className={classes.inlineBlock}>
-              <a
-                href="https://www.shogong.com/main/index.php"
-                className={classes.block}
-                target="_blank"
-              >
-                판매홈
-              </a>
-            </ListItem>
-            <ListItem className={classes.inlineBlock}>
-              <a
-                href="http://manage.shogong.com/"
-                className={classes.block}
-                target="_blank"
-              >
-                입점사플랫폼
-              </a>
-            </ListItem>
-            {/* <ListItem className={classes.inlineBlock}>
-              <a
-                href="http://blog.creative-tim.com/?ref=mkr-footer"
-                className={classes.block}
-                target="_blank"
-              >
-                Blog
-              </a>
-            </ListItem>
-            <ListItem className={classes.inlineBlock}>
-              <a
-                href="https://www.creative-tim.com/license?ref=mkr-footer"
-                className={classes.block}
-                target="_blank"
-              >
-                Licenses
-              </a>
-            </ListItem> */}
-          </List>
-        </div>
+
         <div className={classes.right}>
-          &copy; {1900 + new Date().getYear()} , made with{" "}
-          <Favorite className={classes.icon} /> by{" "}
-          <a
-            href="https://jhy156456.tistory.com/"
-            className={aClasses}
-            target="_blank"
-          >
-            JHY
-          </a>{" "}
-          for a better web.
+          <Typography align="right">
+          분당선불폰 
+          </Typography>
+          <Typography align="right">
+          TEL : 010 2813 4600 
+          </Typography>
+          <Typography align="right">
+          사업자번호 : 514 56 00511 
+          </Typography>
+          <Typography align="right">
+          주소: 경기도 성남시 분당구 성남대로343번길 10 -6
+          </Typography>
+
+
+
+
         </div>
       </div>
     </footer>
