@@ -83,7 +83,12 @@ export default function FactoryDetailPage(props) {
         return <CircularProgress/>;
     
     // console.log(data);
-
+    const locationHref = window
+        .location
+        .href
+        .includes("bundang")
+            ? "https://m.place.naver.com/place/1820140461/home?entry=pll"
+            : "https://m.place.naver.com/place/1099580592/home?entry=pll"
     return (
         <React.Fragment>
             <Parallax small="small" filter="filter" image={require("assets/img/main-image.jpg")} className={classes.container}
@@ -101,15 +106,38 @@ export default function FactoryDetailPage(props) {
                                         paddingTop: '10px'
                                     }}>
                                     <Grid container="container" justify="center" alignItems="center">
-                                        <GridItem xs={3} sm={3} md={3}>
+                                        <GridItem
+                                            xs={3}
+                                            sm={3}
+                                            md={3}
+                                            style={{
+                                                paddingLeft: '0px',
+                                                paddingRight: '0px',
+                                                marginRight:'20px'
+                                            }}>
                                             <a href='tel:010-2813-4600'><img src={callImage} className={classes.imgFluid}/></a>
                                         </GridItem>
-                                        <GridItem xs={3} sm={3} md={3}>
-                                            <img src={kakaoImage} className={classes.imgFluid}/>
+                                        <GridItem
+                                            xs={3}
+                                            sm={3}
+                                            md={3}
+                                            style={{
+                                                paddingLeft: '0px',
+                                                paddingRight: '0px',
+                                                marginRight:'20px'
+                                            }}>
+                                            <a href="http://pf.kakao.com/_AxkTQxb"><img src={kakaoImage} className={classes.imgFluid}/></a>
+
                                         </GridItem>
-                                        <GridItem xs={3} sm={3} md={3}>
-                                            <a
-                                                href="https://map.naver.com/v5/directions/-/14149497.102744166,4490411.988490414,%EA%B2%BD%EA%B8%B0%EB%8F%84%20%EC%84%B1%EB%82%A8%EC%8B%9C%20%EB%B6%84%EB%8B%B9%EA%B5%AC%20%EC%84%B1%EB%82%A8%EB%8C%80%EB%A1%9C343%EB%B2%88%EA%B8%B8%2010-6,,/-/car?c=14149497.1027442,4490411.9884904,15,0,0,0,dh">
+                                        <GridItem
+                                            xs={3}
+                                            sm={3}
+                                            md={3}
+                                            style={{
+                                                paddingLeft: '0px',
+                                                paddingRight: '0px'
+                                            }}>
+                                            <a href={locationHref}>
                                                 <img src={locationImage} className={classes.imgFluid}/>
                                             </a>
                                         </GridItem>

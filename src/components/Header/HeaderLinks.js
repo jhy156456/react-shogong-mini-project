@@ -38,14 +38,14 @@ const HeaderLinks = (props) => {
                                 color="transparent"
                                 className={classes.navLink}
                                 >
-                                <h6>로그아웃</h6>
+                                <h6>메뉴 준비중입니다.</h6>
                                 {/* <i className={classes.socialIcons + " fab fa-instagram"} /> */}
                             </Button>
                             <Button
                                 color="transparent"
                                 className={classes.navLink}
                                 >
-                                <h6>로그아웃</h6>
+                                <h6>메뉴 준비중입니다.</h6>
                                 {/* <i className={classes.socialIcons + " fab fa-instagram"} /> */}
                             </Button>
                         </ListItem>

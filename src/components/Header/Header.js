@@ -148,7 +148,14 @@ export default function Header(props) {
                     color: 'white'
                 }}
                 className={imageClasses}
-                ref={imageRef}>분당선불폰</Typography>
+                ref={imageRef}>{
+                    window
+                        .location
+                        .href
+                        .includes('bundang')
+                            ? "분당선불폰"
+                            : "강남선불폰"
+                }</Typography>
         </a>
 
         // <a href="http://localhost:3000/"><img src={LogoWhite}

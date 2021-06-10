@@ -40,8 +40,12 @@ function App() {
           />
           <ScrollToTop>
             <Switch>
-              <Route path="/store/:id" component={FactoryDetailPage} />
-              <Route path="/" render={() => <FactoryDetailPage />} />
+              <Route path="/gangnam" render={() => <FactoryDetailPage />} />
+              <Route path="/bundang" render={() => <FactoryDetailPage />} />
+              <Route render={({location})=>(
+                  <FactoryDetailPage />
+              )}
+              />
             </Switch>
           </ScrollToTop>
         </Router>
